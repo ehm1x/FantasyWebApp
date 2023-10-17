@@ -100,11 +100,14 @@ const TradeAnalyzer = ({ rosters, currentOwnerId }) => {
     showHeaderButton,
     headerButtonHandler,
   }) => (
-    <div className="Team">
-      <div className="TeamHeader">
-        <span>{headerTitle}</span>
+    <div className="bg-white shadow rounded p-4 space-y-4">
+      <div className="flex justify-between items-center">
+        <h2 className="text-2xl font-bold">{headerTitle}</h2>
         {showHeaderButton && (
-          <button onClick={headerButtonHandler} className="returnButton">
+          <button
+            onClick={headerButtonHandler}
+            className="text-white bg-blue-500 hover:bg-blue-600 px-2 py-1 rounded"
+          >
             Return
           </button>
         )}
@@ -127,21 +130,23 @@ const TradeAnalyzer = ({ rosters, currentOwnerId }) => {
   const Player = ({ playerData, playerSelectHandler, isSelected }) => (
     <button
       onClick={() => playerSelectHandler(playerData)}
-      className={`PlayerButtonn ${isSelected ? "active" : ""}`}
+      className={`flex justify-between items-center p-2 rounded ${
+        isSelected ? "bg-green-500 text-white" : "bg-gray-200 hover:bg-gray-300"
+      } mb-2 w-full`}
     >
-      <span className="PlayerName">{playerData.name}</span>
-      <span className="PlayerTradeValue">{playerData.tradeValue}</span>
+      <span className="flex-1 text-left">{playerData.name}</span>
+      <span className="flex-1 text-right">{playerData.tradeValue}</span>
     </button>
   );
 
   const TeamSelector = ({ teams, teamSelectHandler }) => (
-    <div className="Team">
-      <h2 className="TeamHeader">Select a Team to Trade With</h2>
+    <div className="bg-white shadow rounded p-4 space-y-4">
+      <h2 className="text-2xl font-bold">Select a Team</h2>
       {teams.map((team) => (
         <button
           key={team.owner_id}
           onClick={() => teamSelectHandler(team)}
-          className="TeamButtonn"
+          className="w-full text-white bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded"
         >
           {team.teamName}
         </button>
@@ -154,101 +159,88 @@ const TradeAnalyzer = ({ rosters, currentOwnerId }) => {
   );
 
   const SelectedPlayers = ({ headerTitle, players, totalTradeValue }) => (
-    <div className="SelectedPlayerContainer">
-      <h2 className="SelectedPlayerHeader">{headerTitle}</h2>
+    <div className="bg-white shadow rounded p-4 space-y-4">
+      <h2 className="text-2xl font-bold">{headerTitle}</h2>
       <h2>Total Trade Value: {totalTradeValue}</h2>
       {players
         .sort((a, b) => b.tradeValue - a.tradeValue)
         .map((player, index) => (
-          <p className="SelectedPlayer" key={index}>
-            {player.name} - {player.tradeValue}
-          </p>
+          <div
+            key={index}
+            className="flex justify-between items-center p-2 rounded bg-gray-200 mb-2"
+          >
+            <span className="flex-1 text-left">{player.name}</span>
+            <span className="flex-1 text-right">{player.tradeValue}</span>
+          </div>
         ))}
     </div>
   );
-
   return (
-    <div className="TradeAnalyzerContainer">
-      {/* Stage: Select Team */}
-      {state.stage === "select-team" && (
-        <div className="TeamsContainer">
-          <Team
-            headerTitle={"Your Team"}
-            teamData={state.userTeam.roster}
-            playerSelectHandler={handleUserPlayerSelect}
-            selectedPlayers={state.userSelectedPlayers}
-          />
-
-          <TeamSelector
-            teams={rosters.filter((team) => team.owner_id !== currentOwnerId)}
-            teamSelectHandler={handleTeamSelect}
-          />
-        </div>
-      )}
-
-      {/* Stage: Select Players */}
-      {/* Stage: Select Players */}
-      {state.stage === "select-players" && (
-        <>
-          <div className="TeamsContainer">
+    <div className="TradeAnalyzerContainer p-4 bg-gray-100 min-h-screen">
+      <div className="grid grid-cols-3 gap-5 max-w-5xl mx-auto items-stretch">
+        {/* Stage: Select Team */}
+        {state.stage === "select-team" && (
+          <>
             <Team
               headerTitle={"Your Team"}
               teamData={state.userTeam.roster}
               playerSelectHandler={handleUserPlayerSelect}
               selectedPlayers={state.userSelectedPlayers}
             />
-
+  
+            <TeamSelector
+              teams={rosters.filter((team) => team.owner_id !== currentOwnerId)}
+              teamSelectHandler={handleTeamSelect}
+            />
+  
+            {/* Empty div for the third column */}
+            <div></div>
+          </>
+        )}
+  
+        {/* Stage: Select Players */}
+        {state.stage === "select-players" && (
+          <>
             <Team
-              headerTitle={`${state.selectedTeam.teamName}'s team`}
+              headerTitle={"Your Team"}
+              teamData={state.userTeam.roster}
+              playerSelectHandler={handleUserPlayerSelect}
+              selectedPlayers={state.userSelectedPlayers}
+            />
+  
+            <Team
+              headerTitle={`${state.selectedTeam.teamName}`}
               teamData={state.selectedTeam.roster}
               playerSelectHandler={handlePlayerSelect}
               selectedPlayers={state.selectedPlayers}
               showHeaderButton={true}
               headerButtonHandler={returnToTeamSelect} // Replace with your own function
             />
+          </>
+        )}
+  
+        {/* Stage: Compare */}
+        {state.stage === "compare" && (
+          <TradeValueComparison comparisonFunction={comparePlayers} />
+        )}
+  
+        {state.stage !== "select-team" && (
+          <div className="flex flex-col space-y-4">
+            <SelectedPlayers
+              headerTitle={"Selected Players"}
+              players={state.selectedPlayers}
+              totalTradeValue={totalTradeValueForSelectedTeam}
+            />
+  
+            <SelectedPlayers
+              headerTitle={"User Selected Players"}
+              players={state.userSelectedPlayers}
+              totalTradeValue={totalTradeValueForUserTeam}
+            />
           </div>
-          <div className="ButtonContainer">
-            <button onClick={returnToTeamSelect} className="returnButton">
-              Return
-            </button>
-          </div>
-        </>
-      )}
-      {/* Stage: Compare */}
-      {state.stage === "compare" && (
-        <TradeValueComparison comparisonFunction={comparePlayers} />
-      )}
-
-      <SelectedPlayers
-        headerTitle={"Selected Players"}
-        players={state.selectedPlayers}
-        totalTradeValue={totalTradeValueForSelectedTeam}
-      />
-
-      <SelectedPlayers
-        headerTitle={"User Selected Players"}
-        players={state.userSelectedPlayers}
-        totalTradeValue={totalTradeValueForUserTeam}
-      />
+        )}
+      </div>
     </div>
   );
 };
-
-//   <button onClick={() => onSelect(team)}>{team.teamName}</button>
-// );
-
-// const PlayerButton = ({
-//   player,
-//   onSelect,
-//   isSelected,
-//   playerBelongsToUser,
-// }) => (
-//   <button
-//     onClick={() => onSelect(player)}
-//     style={{ backgroundColor: isSelected ? "green" : "grey" }}
-//   >
-//     {player.name}
-//   </button>
-// );
-
 export default TradeAnalyzer;

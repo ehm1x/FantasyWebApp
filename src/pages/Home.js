@@ -15,10 +15,10 @@ export default function Home({
   userData,
 }) {
   return (
-    <div className="home">
+    <div className="home flex flex-col items-center justify-top h-screen bg-gray-100 text-gray-800">
       {username ? (
         <>
-          <h2>Welcome, {username}</h2>
+          <h2 className="text-2xl font-bold mb-4">Welcome, {username}</h2>
           {!confirmedLeague && (
             <LeagueSelection
               leagues={leagues}
@@ -28,13 +28,13 @@ export default function Home({
           )}
           {confirmedLeague && (
             <>
-              <h2>Current League : {selectedLeague.name}</h2>
+              <h2 className="text-xl mb-2">Current League : {selectedLeague.name}</h2>
               <nav>
-                <div className="nav-buttons">
-                  <NavLink to="/show-rosters" className="nav-button">
+                <div className="flex space-x-4">
+                  <NavLink to="/show-rosters" className="text-white bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded">
                     Show Rosters
                   </NavLink>
-                  <NavLink to="/trade-analyzer" className="nav-button">
+                  <NavLink to="/trade-analyzer" className="text-white bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded">
                     Trade Analyzer
                   </NavLink>
                 </div>
@@ -44,16 +44,16 @@ export default function Home({
         </>
       ) : (
         <>
-          <h1>Welcome</h1>
-          <div className="input-group">
+          <h1 className="text-3xl font-bold mb-6">Welcome</h1>
+          <div className="flex items-center mb-6">
             <input
               type="text"
               value={inputUsername}
               onChange={handleUsernameChange}
-              className="username-input"
+              className="username-input p-2 border-2 border-gray-300 rounded mr-4"
               placeholder="Username"
             />
-            <button onClick={handleConfirmUser}>Confirm</button>
+            <button onClick={handleConfirmUser} className="text-white bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded">Confirm</button>
           </div>
           <main>
             <Outlet />

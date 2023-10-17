@@ -46,12 +46,17 @@ export function useLeague(userData) {
     if (confirmedLeague) fetchLeagueDetails(selectedLeague.league_id);
   }, [confirmedLeague]);
 
-   const fetchUserLeagues = async (userId) => {
+  const fetchUserLeagues = async (userId) => {
     const response = await fetch(
       `${API_BASE}/user/${userId}/leagues/nfl/2023`
     );
     const data = await response.json();
     setLeagues(data);
+  
+    // Set the first league as the default selected league
+    if (data && data.length > 0) {
+      setSelectedLeague(data[0]);
+    }
   };
 
   const fetchLeagueDetails = async (leagueId) => {
@@ -87,8 +92,8 @@ export function useLeague(userData) {
       }
 
       for (const newPlayer of roster.players) {
+        console.log(newPlayer)
         let player = await getPlayerData(newPlayer);
-
         if (!player) {
           console.error(`No player found`);
           errorOccurred = true;
