@@ -1,75 +1,75 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-function ShowRosters({rosters}) {
-    const half = Math.ceil(rosters.length / 2);
-    const firstHalf = rosters.slice(0, half);
-    const secondHalf = rosters.slice(half);
 
-    const getColorClass = (tradeValue) => {
-        if (tradeValue > 75) return 'gold';
-        if (tradeValue > 50) return 'purple';
-        if (tradeValue > 35) return 'blue';
-        if (tradeValue > 15) return 'green';
-        return 'red';
-    }
-
-    const renderRosters = (rosters) => {
-        return rosters.map((roster, rosterIndex) => (
-            <div key={`roster-${rosterIndex}`}>
-                <h1 className="roster-header">{roster.teamName}</h1>
-                {roster.roster
-                    .sort((a, b) => b.tradeValue - a.tradeValue)
-                    .map((player, playerIndex) => (
-                        <Player key={`player-${playerIndex}`} player={player} getColorClass={getColorClass} />
-                    ))}
-            </div>
-        ));
-    }
-
+function ShowRosters({ rosters }) {
     return (
-        <div className="show-rosters">
-            <div className="roster-column">{renderRosters(firstHalf)}</div>
-            <div className="roster-column">{renderRosters(secondHalf)}</div>
+     
+        <div className="bg-gray-200 shadow rounded p-4 space-y-4">
+          <div className="px-4 py-8">
+            <h1 className="text-3xl font-bold pb-5">League Rosters</h1>
+  
+            <div className="grid grid-cols-1 md:grid-cols-1 gap-4">
+              {rosters.map((roster) => (
+                <Team key={roster._id} team={roster} />
+              ))}
+            </div>
+          </div>
         </div>
+
     );
-}
-function Player({ player, getColorClass }) {
-    const [isExpanded, setIsExpanded] = useState(false);
-    const toggleExpanded = () => setIsExpanded(!isExpanded);
+  }
+
+  function Team({ team }) {
+    const [showPlayers, setShowPlayers] = useState(false);
   
     return (
-        <div className="player-info" onClick={toggleExpanded}>
-            <div className="player-header">
-                <h3 className={`player-position ${getColorClass(player.tradeValue)}`}>{player.position}</h3>
-                <p>{player.name}</p>
-            </div>
-            {isExpanded && <PlayerDetails player={player} />}
-        </div>
+      <div 
+        onClick={() => setShowPlayers(!showPlayers)} 
+        className={`p-4 rounded bg-white shadow cursor-pointer ${!showPlayers ? 'hover:bg-gray-100' : ''}`}
+      >
+        <h2 className="text-2xl font-bold">{team.teamName}</h2>
+        {showPlayers && <Players team={team} />}
+      </div>
     );
+  }
+
+function Players({ team }) {
+  return (
+    <div className="p-4">
+      <h3 className="text-xl font-bold mb-4">{team.teamName} Roster</h3>
+      <div className="grid grid-cols-2 gap-4">
+        {team.roster.map((player) => (
+          <Player key={player._id} player={player} />
+        ))}
+      </div>
+    </div>
+  );
 }
 
-function PlayerDetails({ player }) {
-    return (
-        <div className="player-details">
-            <h2>Player Info</h2>
-            <p><strong>Name:</strong> {player.name}</p>
-            <p><strong>Team:</strong> {player.team}</p>
-            <p><strong>Position:</strong> {player.position}</p>
-            <p><strong>Trade Value:</strong> {player.tradeValue.toFixed(2)}</p>
-            <p><strong>Projected Total Points:</strong> {player.projTotalPts.toFixed(2)}</p>
-            <p><strong>Average Projected Points:</strong> {player.avgProjPts.toFixed(2)}</p>
-            <p><strong>Actual Total Points:</strong> {player.actualTotalPts.toFixed(2)}</p>
-            <p><strong>Average Actual Points:</strong> {player.avgActualPts.toFixed(2)}</p>
-            <p><strong>ADP:</strong> {player.adp}</p>
-            <p><strong>Rest of Season Projected Total:</strong> {player.rosProjTotal.toFixed(2)}</p>
-            <p><strong>Trade Positional Ranking:</strong> {player.tradePositionalRanking}</p>
-            <p><strong>Trade Overall Ranking:</strong> {player.tradeOverallRanking}</p>
-            <p><strong>Stats Positional Ranking:</strong> {player.statsPositionalRanking}</p>
-            <p><strong>Stats Overall Ranking:</strong> {player.statsOverallRanking}</p>
-            <p><strong>Injury Status:</strong> {player.injuryStats}</p>
-            {player.injuryStats !== "None" && player.injuryBodyPart !== "None" &&<p><strong>Injury Body Part:</strong> {player.injuryBodyPart}</p>}
-        </div>
-    );
+function Player({ player }) {
+  let boxClass;
+
+  if (player.tradeValue > 75) {
+    boxClass = 'bg-yellow-500';
+  } else if (player.tradeValue > 50) {
+    boxClass = 'bg-purple-500';
+  } else if (player.tradeValue > 35) {
+    boxClass = 'bg-blue-500';
+  } else if (player.tradeValue > 15) {
+    boxClass = 'bg-green-500';
+  } else {
+    boxClass = 'bg-red-500';
+  }
+
+  // Add opacity to color
+  boxClass = boxClass.replace('500', '500 bg-opacity-50');
+
+  return (
+    <div className={`p-2 rounded ${boxClass} flex justify-between`}>
+      <p className="font-semibold">{player.name}</p>
+      <p>{player.tradeValue}</p>
+    </div>
+  );
 }
 
 export default ShowRosters;

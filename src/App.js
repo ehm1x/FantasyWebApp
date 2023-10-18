@@ -36,11 +36,12 @@ const App = () => {
 
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route path="/" element={<RootLayout />}>
+      <Route path="/" element={<RootLayout userData = {userData} />}>
         <Route index element={HomeComponent} />
         <Route path="about" element={<About />} />
         <Route path="show-rosters" element={rosters ? <ShowRosters rosters = {rosters}/>: HomeComponent} /> 
         <Route path="trade-analyzer" element={ userData ? <TradeAnalyzer rosters = {rosters} currentOwnerId={userData.user_id}/> : HomeComponent} />
+        <Route path="expert-picks" element={<h1> Coming Soon! </h1>} /> 
       </Route>
     )
   );

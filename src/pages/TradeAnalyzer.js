@@ -177,7 +177,7 @@ const TradeAnalyzer = ({ rosters, currentOwnerId }) => {
   );
   return (
     <div className="TradeAnalyzerContainer p-4 bg-gray-100 min-h-screen">
-      <div className="grid grid-cols-3 gap-5 max-w-5xl mx-auto items-stretch">
+      <div className="grid grid-cols-3 gap-5 max-w-6xl mx-auto items-stretch">
         {/* Stage: Select Team */}
         {state.stage === "select-team" && (
           <>

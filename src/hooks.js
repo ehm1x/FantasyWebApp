@@ -64,7 +64,7 @@ export function useLeague(userData) {
       `${API_BASE}/league/${leagueId}/users`
     );
     const leagueUsers = await leagueUsersResponse.json();
-
+    
     const leagueTeamsResponse = await fetch(
       `${API_BASE}/league/${leagueId}/rosters`
     );
@@ -80,7 +80,7 @@ export function useLeague(userData) {
       return;
     }
     const teams = leagueUsers.map(async (userTeam) => {
-      const team = new Team(userTeam.display_name, userTeam.user_id);
+      const team = new Team(userTeam.display_name, userTeam.user_id, userTeam.avatar);
       const roster = leagueTeams.find(
         (roster) => roster.owner_id === userTeam.user_id
       );
@@ -102,7 +102,7 @@ export function useLeague(userData) {
           team.roster.push(player);
         }
       }
-
+      
       return team;
     });
 
@@ -130,6 +130,7 @@ class Team {
     constructor(tName, owner) {
       this.teamName = tName || "";
       this.owner_id = owner;
+      this.avatar_id = 0; 
       this.roster = [];
       this.totalPts = 0;
       this.totalWeekly = 0;
