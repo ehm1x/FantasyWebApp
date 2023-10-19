@@ -127,17 +127,32 @@ const TradeAnalyzer = ({ rosters, currentOwnerId }) => {
     </div>
   );
 
-  const Player = ({ playerData, playerSelectHandler, isSelected }) => (
-    <button
-      onClick={() => playerSelectHandler(playerData)}
-      className={`flex justify-between items-center p-2 rounded ${
-        isSelected ? "bg-green-500 text-white" : "bg-gray-200 hover:bg-gray-300"
-      } mb-2 w-full`}
-    >
-      <span className="flex-1 text-left">{playerData.name}</span>
-      <span className="flex-1 text-right">{playerData.tradeValue}</span>
-    </button>
-  );
+  const Player = ({ playerData, playerSelectHandler, isSelected }) => {
+    let boxClass;
+    if (playerData.tradeValue > 75) {
+      boxClass = 'bg-yellow-500';
+    } else if (playerData.tradeValue > 50) {
+      boxClass = 'bg-purple-500';
+    } else if (playerData.tradeValue > 35) {
+      boxClass = 'bg-blue-500';
+    } else if (playerData.tradeValue > 15) {
+      boxClass = 'bg-green-500';
+    } else {
+      boxClass = 'bg-red-500';
+    }
+    boxClass += ' bg-opacity-50';
+    return (
+      <button
+        onClick={() => playerSelectHandler(playerData)}
+        className={`flex ${boxClass} justify-between items-center p-2 rounded ${
+          isSelected ? "bg-green-500 text-white" : "bg-gray-200 hover:{bg-gray-300}"
+        } mb-2 w-full`}
+      >
+        <span className="flex-1 text-left font-semibold">{playerData.name}</span>
+        <span className="flex-1 text-right">{playerData.tradeValue}</span>
+      </button>
+    );
+  };
 
   const TeamSelector = ({ teams, teamSelectHandler }) => (
     <div className="bg-white shadow rounded p-4 space-y-4">
@@ -158,9 +173,12 @@ const TradeAnalyzer = ({ rosters, currentOwnerId }) => {
     <p>The difference in trade value is: {comparisonFunction()}</p>
   );
 
-  const SelectedPlayers = ({ headerTitle, players, totalTradeValue }) => (
+  const SelectedPlayers = ({ headerTitle, players, totalTradeValue, tradeValueDifference }) => (
     <div className="bg-white shadow rounded p-4 space-y-4">
-      <h2 className="text-2xl font-bold">{headerTitle}</h2>
+      <div className="flex justify-between items-center">
+        <h2 className="text-2xl font-bold">{headerTitle}</h2>
+        <h2 className="text-2xl font-regular">{tradeValueDifference}</h2>
+      </div>
       <h2>Total Trade Value: {totalTradeValue}</h2>
       {players
         .sort((a, b) => b.tradeValue - a.tradeValue)
@@ -230,12 +248,14 @@ const TradeAnalyzer = ({ rosters, currentOwnerId }) => {
               headerTitle={"Selected Players"}
               players={state.selectedPlayers}
               totalTradeValue={totalTradeValueForSelectedTeam}
+             tradeValueDifference={totalTradeValueForSelectedTeam - totalTradeValueForUserTeam}
             />
   
             <SelectedPlayers
               headerTitle={"User Selected Players"}
               players={state.userSelectedPlayers}
               totalTradeValue={totalTradeValueForUserTeam}
+              tradeValueDifference={totalTradeValueForUserTeam - totalTradeValueForSelectedTeam}
             />
           </div>
         )}
