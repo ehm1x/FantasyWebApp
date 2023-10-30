@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Modal from "../components/playerModal";
+import BasicModal from "../components/playerModal";
 
 function ShowRosters({ rosters }) {
     return (
@@ -63,29 +63,26 @@ function Player({ player }) {
   }
 
   // Add opacity to color
-    boxClass = boxClass.replace('500', '500 bg-opacity-50');
+  boxClass = boxClass.replace('500', '500 bg-opacity-50');
 
-    
-    return (
+const handleClick = (event) => {
+  event.stopPropagation();
+  setIsOpen(true);
+}; 
+
+  return (
+    <>
       <div 
-        onClick={() => setIsOpen(true)} 
-        className={`p-2 rounded ${boxClass} flex justify-between`}
+        onClick={handleClick}
+        className={`p-2 rounded ${boxClass} flex justify-between cursor-pointer`}
       >
         <p className="font-semibold">{player.name}</p>
         <p>{player.tradeValue}</p>
-
-        {/* <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
-          <div className="text-xl font-bold mb-4">{player.name} Stats</div>
-          {Array.isArray(player.weeklyStats) && player.weeklyStats.map((week) => (
-            <div key={week.weekNumber} className="flex justify-between">
-              <div>{week.weekNumber}</div>
-              <div>{week.points}</div>
-            </div>
-          ))}
-        </Modal> */}
       </div>
-    );
-  }
+      <BasicModal isOpen={isOpen} setIsOpen={setIsOpen} player={player} />
+    </>
+  );
+}
 
 
 export default ShowRosters;

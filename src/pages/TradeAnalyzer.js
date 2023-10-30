@@ -59,10 +59,6 @@ const TradeAnalyzer = ({ rosters, currentOwnerId }) => {
     }));
   };
 
-  const finishUserSelecting = () => {
-    setState((prevState) => ({ ...prevState, stage: "compare" }));
-  };
-
   const comparePlayers = () => {
     const totalTradeValueSelected = state.selectedPlayers.reduce(
       (sum, player) => sum + player.tradeValue,
@@ -127,28 +123,39 @@ const TradeAnalyzer = ({ rosters, currentOwnerId }) => {
     </div>
   );
 
-  const Player = ({ playerData, playerSelectHandler, isSelected }) => {
-    let boxClass;
-    if (playerData.tradeValue > 75) {
-      boxClass = 'bg-yellow-500';
-    } else if (playerData.tradeValue > 50) {
-      boxClass = 'bg-purple-500';
-    } else if (playerData.tradeValue > 35) {
-      boxClass = 'bg-blue-500';
-    } else if (playerData.tradeValue > 15) {
-      boxClass = 'bg-green-500';
+  function findTradeColor(tradeValue) {
+    let boxClass = "";
+    if (tradeValue > 75) {
+      boxClass = "yellow";
+    } else if (tradeValue > 50) {
+      boxClass = "purple";
+    } else if (tradeValue > 35) {
+      boxClass = "blue";
+    } else if (tradeValue > 15) {
+      boxClass = "green";
     } else {
-      boxClass = 'bg-red-500';
+      boxClass = "red";
     }
-    boxClass += ' bg-opacity-50';
+    return boxClass;
+  }
+
+  const Player = ({ playerData, playerSelectHandler, isSelected }) => {
+    let boxClass = findTradeColor(playerData.tradeValue);
+    const baseColor = `bg-${boxClass}-500 bg-opacity-50 `;
+    const selectedColor = `${baseColor} border-2 border-black`;
+
     return (
+      // button that just shows player.name and has a hover value that changes background color
       <button
         onClick={() => playerSelectHandler(playerData)}
-        className={`flex ${boxClass} justify-between items-center p-2 rounded ${
-          isSelected ? "bg-green-500 text-white" : "bg-gray-200 hover:{bg-gray-300}"
-        } mb-2 w-full`}
+        className={`flex justify-between items-center p-2 rounded 
+      ${
+        isSelected ? `${selectedColor}` : `${baseColor} `
+      } mb-2 w-full transition-colors duration-15 hover:bg-${boxClass}-200`}
       >
-        <span className="flex-1 text-left font-semibold">{playerData.name}</span>
+        <span className="flex-1 text-left font-semibold">
+          {playerData.name}
+        </span>
         <span className="flex-1 text-right">{playerData.tradeValue}</span>
       </button>
     );
@@ -173,26 +180,70 @@ const TradeAnalyzer = ({ rosters, currentOwnerId }) => {
     <p>The difference in trade value is: {comparisonFunction()}</p>
   );
 
-  const SelectedPlayers = ({ headerTitle, players, totalTradeValue, tradeValueDifference }) => (
-    <div className="bg-white shadow rounded p-4 space-y-4">
-      <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-bold">{headerTitle}</h2>
-        <h2 className="text-2xl font-regular">{tradeValueDifference}</h2>
-      </div>
-      <h2>Total Trade Value: {totalTradeValue}</h2>
-      {players
-        .sort((a, b) => b.tradeValue - a.tradeValue)
-        .map((player, index) => (
-          <div
-            key={index}
-            className="flex justify-between items-center p-2 rounded bg-gray-200 mb-2"
+  const SelectedPlayers = ({
+    headerTitle,
+    players,
+    totalTradeValue,
+    tradeValueDifference,
+  }) => {
+    const findTradeColor = (tradeValue) => {
+      let boxClass = "";
+      if (tradeValue > 75) {
+        boxClass = "yellow";
+      } else if (tradeValue > 50) {
+        boxClass = "purple";
+      } else if (tradeValue > 35) {
+        boxClass = "blue";
+      } else if (tradeValue > 15) {
+        boxClass = "green";
+      } else {
+        boxClass = "red";
+      }
+      return boxClass;
+    };
+
+    const tradeValueDifferenceColor = (tradeValueDifference) => {
+      let tradeValueDifferenceCol = '';
+      if (tradeValueDifference > 0) {
+        tradeValueDifferenceCol = 'text-green-500';
+      } else if (tradeValueDifference < 0) {
+        tradeValueDifferenceCol = 'text-red-500';
+      } else {
+        tradeValueDifferenceCol = 'text-black';
+      }
+      return tradeValueDifferenceCol;
+    }
+
+    return (
+      <div className="bg-white shadow rounded p-4 space-y-4">
+        <div className="flex justify-between items-center">
+          <h2 className="text-2xl font-bold">{headerTitle}</h2>
+          <h2
+            className={`${tradeValueDifferenceColor(
+              tradeValueDifference
+            )} text-2xl font-regular`}
           >
-            <span className="flex-1 text-left">{player.name}</span>
-            <span className="flex-1 text-right">{player.tradeValue}</span>
-          </div>
-        ))}
-    </div>
-  );
+            {tradeValueDifference}
+          </h2>
+        </div>
+        <h2>Total Trade Value: {totalTradeValue}</h2>
+        {players
+          .sort((a, b) => b.tradeValue - a.tradeValue)
+          .map((player, index) => {
+            const tradeColor = findTradeColor(player.tradeValue);
+            return (
+              <div
+                key={index}
+                className={`flex justify-between items-center p-2 rounded bg-${tradeColor}-500 bg-opacity-50 mb-2`}
+              >
+                <span className="flex-1 text-left">{player.name}</span>
+                <span className="flex-1 text-right">{player.tradeValue}</span>
+              </div>
+            );
+          })}
+      </div>
+    );
+  };
   return (
     <div className="TradeAnalyzerContainer p-4 bg-gray-100 min-h-screen">
       <div className="grid grid-cols-3 gap-5 max-w-6xl mx-auto items-stretch">
@@ -205,17 +256,17 @@ const TradeAnalyzer = ({ rosters, currentOwnerId }) => {
               playerSelectHandler={handleUserPlayerSelect}
               selectedPlayers={state.userSelectedPlayers}
             />
-  
+
             <TeamSelector
               teams={rosters.filter((team) => team.owner_id !== currentOwnerId)}
               teamSelectHandler={handleTeamSelect}
             />
-  
+
             {/* Empty div for the third column */}
             <div></div>
           </>
         )}
-  
+
         {/* Stage: Select Players */}
         {state.stage === "select-players" && (
           <>
@@ -225,7 +276,7 @@ const TradeAnalyzer = ({ rosters, currentOwnerId }) => {
               playerSelectHandler={handleUserPlayerSelect}
               selectedPlayers={state.userSelectedPlayers}
             />
-  
+
             <Team
               headerTitle={`${state.selectedTeam.teamName}`}
               teamData={state.selectedTeam.roster}
@@ -236,26 +287,30 @@ const TradeAnalyzer = ({ rosters, currentOwnerId }) => {
             />
           </>
         )}
-  
+
         {/* Stage: Compare */}
         {state.stage === "compare" && (
           <TradeValueComparison comparisonFunction={comparePlayers} />
         )}
-  
+
         {state.stage !== "select-team" && (
           <div className="flex flex-col space-y-4">
             <SelectedPlayers
               headerTitle={"Selected Players"}
               players={state.selectedPlayers}
               totalTradeValue={totalTradeValueForSelectedTeam}
-             tradeValueDifference={totalTradeValueForSelectedTeam - totalTradeValueForUserTeam}
+              tradeValueDifference={
+                totalTradeValueForSelectedTeam - totalTradeValueForUserTeam
+              }
             />
-  
+
             <SelectedPlayers
               headerTitle={"User Selected Players"}
               players={state.userSelectedPlayers}
               totalTradeValue={totalTradeValueForUserTeam}
-              tradeValueDifference={totalTradeValueForUserTeam - totalTradeValueForSelectedTeam}
+              tradeValueDifference={
+                totalTradeValueForUserTeam - totalTradeValueForSelectedTeam
+              }
             />
           </div>
         )}
