@@ -13,12 +13,13 @@ import TradeAnalyzer from "./pages/TradeAnalyzer";
 import { useUser, useLeague } from './hooks';
 import { Team, getPlayerData } from './hooks';
 import LeagueSelection from "./pages/SelectLeague";
+import ExpertPicks from "./pages/expertpicks";
+import BasicModal from "./components/playerModal";
 
 const App = () => {
   const { username, handleUsernameChange, handleConfirmUser, userData } = useUser();
   const { selectedLeague, handleLeagueChange, handleLeagueConfirm, rosters, leagues, confirmedLeague } = useLeague(userData);
-
-  // Define the Home component with all its props
+  const examplePlayer = rosters ? rosters[1].roster[7] : 0;
   const HomeComponent = (
     <Home
       handleUsernameChange={handleUsernameChange}
@@ -41,7 +42,7 @@ const App = () => {
         <Route path="about" element={<About />} />
         <Route path="show-rosters" element={rosters ? <ShowRosters rosters = {rosters}/>: HomeComponent} /> 
         <Route path="trade-analyzer" element={ userData ? <TradeAnalyzer rosters = {rosters} currentOwnerId={userData.user_id}/> : HomeComponent} />
-        <Route path="expert-picks" element={<h1> Coming Soon! </h1>} /> 
+        <Route path="expert-picks" element={<ExpertPicks player = {examplePlayer}/>} /> 
       </Route>
     )
   );
