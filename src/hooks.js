@@ -87,22 +87,29 @@ export function useLeague(userData) {
       let errorOccurred = false;
 
       if (!Array.isArray(roster.players)) {
-        console.log("not an array");
+        console.error(`Error: roster for team ${team.teamName} is not an array`);
         return;
       }
 
       for (const newPlayer of roster.players) {
-        console.log(newPlayer)
+
         let player = await getPlayerData(newPlayer);
         if (!player) {
-          console.error(`No player found`);
+          console.log(`Error: player ${newPlayer} not found for team ${team.teamName}`);
           errorOccurred = true;
           break;
         } else {
           team.roster.push(player);
         }
       }
-      
+
+      if (errorOccurred) {
+        console.error(`Error occurred while constructing team ${team.teamName}`);
+        return;
+      }
+      team.calculateTotalPts();
+      team.calculateTotalWeekly();
+      team.calculateTradeValue();
       return team;
     });
 
@@ -136,21 +143,45 @@ class Team {
       this.totalWeekly = 0;
       this.totalTradeValue = 0;
     }
+    construct(){
+      this.caclulateTotalPts();
+      this.calculateTradeValue();
+      this.calculateTotalWeekly();
+    }
+    calculateTotalPts() {
+      this.totalPts = 0;
+      this.roster.forEach((player) => {
+        this.totalPts += player.actualTotalPts;
+      });
+    }
+    calculateTradeValue(){
+      this.totalTradeValue = 0;
+      this.roster.forEach((player) => {
+        this.totalTradeValue += player.tradeValue;
+      });
+    }
+    calculateTotalWeekly(){
+      this.totalWeekly = 0;
+      this.roster.forEach((player) => {
+        this.totalWeekly += player.avgActualPts;
+      });
+    }
   }
 
 
   async function getPlayerData(playerId) {
     try {
-      const response = await fetch(
-        `http://localhost:8080/api/nfl/player/${playerId}`
-      );
+      const response = await fetch(`http://localhost:8080/api/nfl/player/${playerId}`);
       const playerData = await response.json();
+  
       if (playerData.err) {
-        console.error("Error: " < playerData.err);
+        console.error(`Error from server when fetching player ${playerId}: `, playerData.err);
+        throw new Error(playerData.err);
       } else {
         return playerData;
       }
     } catch (error) {
-      console.error("Error: ", error);
+      console.error(`Error fetching data for player ${playerId}: `, error);
+      throw error;
     }
   }
