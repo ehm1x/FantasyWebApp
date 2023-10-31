@@ -143,24 +143,20 @@ const TradeAnalyzer = ({ rosters, currentOwnerId }) => {
     let boxClass = findTradeColor(playerData.tradeValue);
     const baseColor = `bg-${boxClass}-500 bg-opacity-50 `;
     const selectedColor = `${baseColor} border-2 border-black`;
-
     return (
-      // button that just shows player.name and has a hover value that changes background color
       <button
         onClick={() => playerSelectHandler(playerData)}
         className={`flex justify-between items-center p-2 rounded 
-      ${
-        isSelected ? `${selectedColor}` : `${baseColor} `
-      } mb-2 w-full transition-colors duration-15 hover:bg-${boxClass}-200`}
+        ${isSelected ? `${selectedColor}` : `${baseColor} `}
+        mb-2 w-full transition-colors duration-5 hover:bg-${boxClass}-200`}
       >
-        <span className="flex-1 text-left font-semibold">
-          {playerData.name}
+        <span className="flex-grow-3 text-left font-semibold">
+        {playerData.position} {playerData.name}
         </span>
-        <span className="flex-1 text-right">{playerData.tradeValue}</span>
+        <span className="flex-grow-1 text-right">{playerData.tradeValue}</span>
       </button>
     );
   };
-
   const TeamSelector = ({ teams, teamSelectHandler }) => (
     <div className="bg-white shadow rounded p-4 space-y-4">
       <h2 className="text-2xl font-bold">Select a Team</h2>
@@ -203,16 +199,16 @@ const TradeAnalyzer = ({ rosters, currentOwnerId }) => {
     };
 
     const tradeValueDifferenceColor = (tradeValueDifference) => {
-      let tradeValueDifferenceCol = '';
+      let tradeValueDifferenceCol = "";
       if (tradeValueDifference > 0) {
-        tradeValueDifferenceCol = 'text-green-500';
+        tradeValueDifferenceCol = "text-green-500";
       } else if (tradeValueDifference < 0) {
-        tradeValueDifferenceCol = 'text-red-500';
+        tradeValueDifferenceCol = "text-red-500";
       } else {
-        tradeValueDifferenceCol = 'text-black';
+        tradeValueDifferenceCol = "text-black";
       }
       return tradeValueDifferenceCol;
-    }
+    };
 
     return (
       <div className="bg-white shadow rounded p-4 space-y-4">
