@@ -11,10 +11,7 @@ import ShowRosters from "./pages/ShowRosters";
 import TradeAnalyzer from "./pages/TradeAnalyzer";
 
 import { useUser, useLeague } from './hooks';
-import { Team, getPlayerData } from './hooks';
-import LeagueSelection from "./pages/SelectLeague";
 import TeamRankings from "./pages/teamrankings";
-import BasicModal from "./components/playerModal";
 
 const App = () => {
   const { username, handleUsernameChange, handleConfirmUser, userData } = useUser();

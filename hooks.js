@@ -76,7 +76,7 @@ export function useLeague(userData) {
 
   const constructTeams = async (leagueUsers, leagueTeams) => {
     if (!leagueUsers || !leagueTeams) {
-      console.error("ERROR LEAGUE UERS OR LEAGUE TEAMS IS NULL OR UNDEFINED");
+      console.error("ERROR LEAGUE USERS OR LEAGUE TEAMS IS NULL OR UNDEFINED");
       return;
     }
     const teams = leagueUsers.map(async (userTeam) => {
@@ -84,7 +84,6 @@ export function useLeague(userData) {
       const roster = leagueTeams.find(
         (roster) => roster.owner_id === userTeam.user_id
       );
-      let errorOccurred = false;
 
       if (!Array.isArray(roster.players)) {
         console.error(`Error: roster for team ${team.teamName} is not an array`);
@@ -92,21 +91,14 @@ export function useLeague(userData) {
       }
 
       for (const newPlayer of roster.players) {
-
-        let player = await getPlayerData(newPlayer);
-        if (!player) {
-          console.log(`Error: player ${newPlayer} not found for team ${team.teamName}`);
-          errorOccurred = true;
-          break;
-        } else {
+        try {
+          let player = await getPlayerData(newPlayer);
           team.roster.push(player);
+        } catch (error) {
+          console.log(`Error: player ${newPlayer} not found for team ${team.teamName}`);
         }
       }
 
-      if (errorOccurred) {
-        console.error(`Error occurred while constructing team ${team.teamName}`);
-        return;
-      }
       team.calculateTotalPts();
       team.calculateTotalWeekly();
       team.calculateTradeValue();
