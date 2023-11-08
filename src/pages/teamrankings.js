@@ -38,7 +38,7 @@ const TeamRankings = ({ rosters }) => {
       <div className="w-1/3 flex flex-col items-center px-4 bg-white rounded-lg shadow-lg m-4">
         <h2 className="mb-4">Teams by Trade Value</h2>
         {teamsByTradeValue(rosters).map((team, index) => (
-          <button key={index} className={`w-full mb-2 p-2 text-left rounded text-white flex justify-between ${getColor(index)}`}>
+          <button key={index} className={`w-full mb-2 p-2 text-left rounded font-semibold flex justify-between ${getColor(index)} bg-opacity-60`}>
             <span>{index + 1}. {team.teamName}</span>
             <span>{team.totalTradeValue.toFixed(2)}</span>
           </button>
@@ -48,7 +48,7 @@ const TeamRankings = ({ rosters }) => {
       <div className="w-1/3 flex flex-col items-center px-4 bg-white rounded-lg shadow-lg m-4">
         <h2 className="mb-4">Teams by Total Points</h2>
         {teamsByTotalPts(rosters).map((team, index) => (
-          <button key={index} className={`w-full mb-2 p-2 text-left rounded text-white flex justify-between ${getColor(index)}`}>
+          <button key={index} className={`w-full mb-2 p-2 text-left rounded font-semibold flex justify-between ${getColor(index)} bg-opacity-60`}>
             <span>{index + 1}. {team.teamName}</span>
             <span>{team.totalPts.toFixed(2)}</span>
           </button>
@@ -58,7 +58,7 @@ const TeamRankings = ({ rosters }) => {
       <div className="w-1/3 flex flex-col items-center px-4 bg-white rounded-lg shadow-lg m-4">
         <h2 className="mb-4">Teams by Weekly Total</h2>
         {teamsByWeeklyTotal(rosters).map((team, index) => (
-          <button key={index} className={`w-full mb-2 p-2 text-left rounded text-white flex justify-between ${getColor(index)}`}>
+          <button key={index} className={`w-full mb-2 p-2 text-left rounded font-semibold flex justify-between ${getColor(index)} bg-opacity-60`}>
             <span>{index + 1}. {team.teamName}</span>
             <span>{team.totalWeekly.toFixed(2)}</span>
           </button>
@@ -69,3 +69,6 @@ const TeamRankings = ({ rosters }) => {
 }
 
 export default TeamRankings;
+
+
+
