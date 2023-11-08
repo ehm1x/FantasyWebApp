@@ -38,7 +38,7 @@ function Players({ team }) {
     <div className="p-4">
       <h3 className="text-xl font-bold mb-4">{team.teamName} Roster</h3>
       <div className="grid grid-cols-2 gap-4">
-        {team.roster.map((player) => (
+        {team.roster.sort((a,b) => b.tradeValue - a.tradeValue).map((player) => (
           <Player key={player._id} player={player} />
         ))}
       </div>
@@ -51,19 +51,17 @@ function Player({ player }) {
   let boxClass;
 
   if (player.tradeValue > 75) {
-    boxClass = "bg-yellow-500";
+    boxClass = "yellow";
   } else if (player.tradeValue > 50) {
-    boxClass = "bg-purple-500";
+    boxClass = "purple";
   } else if (player.tradeValue > 35) {
-    boxClass = "bg-blue-500";
+    boxClass = "blue";
   } else if (player.tradeValue > 15) {
-    boxClass = "bg-green-500";
+    boxClass = "green";
   } else {
-    boxClass = "bg-red-500";
+    boxClass = "red";
   }
 
-  // Add opacity to color
-  boxClass = boxClass.replace("500", "500 bg-opacity-50");
 
   const handleClick = (event) => {
     event.stopPropagation();
@@ -74,9 +72,9 @@ function Player({ player }) {
     <>
       <div
         onClick={handleClick}
-        className={`p-2 rounded ${boxClass} flex justify-between cursor-pointer`}
+        className={`p-2 rounded bg-${boxClass}-500 bg-opacity-50 hover:bg-${boxClass}-200 flex justify-between cursor-pointer`}
       >
-        <p className="font-semibold">{player.name}</p>
+        <p className="font-semibold">{player.position} {player.name}</p>
         <p>{player.tradeValue}</p>
       </div>
       <BasicModal isOpen={isOpen} setIsOpen={setIsOpen} player={player} />
