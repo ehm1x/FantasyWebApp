@@ -38,7 +38,7 @@ function Players({ team }) {
     <div className="p-4">
       <h3 className="text-xl font-bold mb-4">{team.teamName} Roster</h3>
       <div className="grid grid-cols-2 gap-4">
-        {team.roster.sort((a,b) => b.tradeValue - a.tradeValue).map((player) => (
+        {team.roster.sort((a, b) => b.tradeValue - a.tradeValue).map((player) => (
           <Player key={player._id} player={player} />
         ))}
       </div>
@@ -51,17 +51,19 @@ function Player({ player }) {
   let boxClass;
 
   if (player.tradeValue > 75) {
-    boxClass = "yellow";
+    boxClass = "bg-yellow-500";
   } else if (player.tradeValue > 50) {
-    boxClass = "purple";
+    boxClass = "bg-purple-500";
   } else if (player.tradeValue > 35) {
-    boxClass = "blue";
+    boxClass = "bg-blue-500";
   } else if (player.tradeValue > 15) {
-    boxClass = "green";
+    boxClass = "bg-green-500";
   } else {
-    boxClass = "red";
+    boxClass = "bg-red-500";
   }
 
+  // Add opacity to color
+  boxClass = boxClass.replace("500", "500 bg-opacity-50");
 
   const handleClick = (event) => {
     event.stopPropagation();
@@ -70,16 +72,22 @@ function Player({ player }) {
 
   return (
     <>
-      <div
-        onClick={handleClick}
-        className={`p-2 rounded bg-${boxClass}-500 bg-opacity-50 hover:bg-${boxClass}-200 flex justify-between cursor-pointer`}
-      >
-        <p className="font-semibold">{player.position} {player.name}</p>
-        <p>{player.tradeValue}</p>
-      </div>
-      <BasicModal isOpen={isOpen} setIsOpen={setIsOpen} player={player} />
+        <div
+            onClick={handleClick}
+            className={`p-2 rounded ${boxClass} flex justify-between cursor-pointer items-center`}
+        >
+            <div className="flex items-center">
+                <div className="flex justify-center items-center rounded-full w-10 h-10 overflow-hidden">
+                    <img src={`https://sleepercdn.com/content/nfl/players/${player.player_id}.jpg`} alt={player.name} className="transform scale-110 object-cover w-full h-full" />
+                </div>
+                <p className="font-semibold ml-2">[{player.position}] {player.name}</p>
+            </div>
+            <p>{player.tradeValue}</p>
+        </div>
+        <BasicModal isOpen={isOpen} setIsOpen={setIsOpen} player={player} />
     </>
-  );
+);
 }
+
 
 export default ShowRosters;
