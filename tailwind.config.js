@@ -10,6 +10,13 @@ module.exports = {
       },
       fontFamily:{
         'poppins': ['Poppins', 'sans-serif'], 
+      },
+      width: {
+        '23' : '8rem', 
+        '24' : '11rem',
+        '1/7': '14.2857143%',
+        '1/8': '12.5%',
+        '1/9': '11.1111111%',
       }
     },
   },
