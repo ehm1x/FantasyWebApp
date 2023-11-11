@@ -1,6 +1,6 @@
 import { React, useState, useEffect } from "react";
 import { NavLink, Outlet } from "react-router-dom";
-import logo from "C:\\FantasyFolder\\reactrebuild\\src\\2.svg";
+import logo from "../2.svg";
 
 export default function RootLayout({ userData }) {
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);
@@ -28,11 +28,11 @@ export default function RootLayout({ userData }) {
                 Show Rosters
               </NavLink>
               <NavLink
-                to="/expert-picks"
+                to="/team-rankings"
                 className="text-white text-sm hover:text-blue-300 "
                 activeClassName="font-bold"
               >
-                Expert Picks
+                Team Rankings
               </NavLink>
             </div>
           </div>

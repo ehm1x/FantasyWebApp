@@ -1,7 +1,7 @@
 import React from "react";
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider, useNavigate } from "react-router-dom";
 
-import "./app.css";
+
 import "./index.css";
 
 import RootLayout from "./layouts/RootLayout";
