@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import {Avatar} from "../components/Avatar";
 
 const TradeAnalyzer = ({ rosters, currentOwnerId }) => {
   const [state, setState] = useState({
@@ -183,7 +184,9 @@ const TradeAnalyzer = ({ rosters, currentOwnerId }) => {
           onClick={() => teamSelectHandler(team)}
           className="w-full text-white bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded"
         >
-          {team.teamName}
+          <div className="flex items-center">
+         <Avatar avatarId = {team.avatar_id}/> <div className ="pl-4"> {team.teamName} </div>
+         </div> 
         </button>
       ))}
     </div>
@@ -205,9 +208,9 @@ const TradeAnalyzer = ({ rosters, currentOwnerId }) => {
         boxClass = "yellow";
       } else if (tradeValue > 50) {
         boxClass = "purple";
-      } else if (tradeValue > 35) {
+      } else if (tradeValue > 25) {
         boxClass = "blue";
-      } else if (tradeValue > 15) {
+      } else if (tradeValue > 10) {
         boxClass = "green";
       } else {
         boxClass = "red";

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import BasicModal from "../components/playerModal";
+import {Avatar} from "../components/Avatar";  
 
 function ShowRosters({ rosters }) {
   return (
@@ -19,7 +20,8 @@ function ShowRosters({ rosters }) {
 
 function Team({ team }) {
   const [showPlayers, setShowPlayers] = useState(false);
-
+  console.log(team);
+  console.log(team.avatar_id);
   return (
     <div
       onClick={() => setShowPlayers(!showPlayers)}
@@ -27,7 +29,11 @@ function Team({ team }) {
         !showPlayers ? "hover:bg-gray-100" : ""
       }`}
     >
-      <h2 className="text-2xl font-bold">{team.teamName}</h2>
+      <h2 className="text-2xl font-bold">
+        <div className="flex items-center">
+         <Avatar avatarId = {team.avatar_id}/> <div className ="pl-4"> {team.teamName} </div>
+         </div>
+        </h2>
       {showPlayers && <Players team={team} />}
     </div>
   );
@@ -36,14 +42,13 @@ function Team({ team }) {
 function Players({ team }) {
   return (
     <div className="p-4">
-      <h3 className="text-xl font-bold mb-4">{team.teamName} Roster</h3>
       <div className="grid grid-cols-2 gap-4">
         {team.roster
-          .filter(player => player !== null) // Filter out null values
+          .filter((player) => player !== null) // Filter out null values
           .sort((a, b) => b.tradeValue - a.tradeValue)
           .map((player) => (
             <Player key={player._id} player={player} />
-        ))}
+          ))}
       </div>
     </div>
   );
@@ -72,26 +77,34 @@ function Player({ player }) {
     event.stopPropagation();
     setIsOpen(true);
   };
-  let imgUrl = player.position === 'DEF' ? `https://sleepercdn.com/images/team_logos/nfl/${player.player_id.toLowerCase()}.png` : `https://sleepercdn.com/content/nfl/players/${player.player_id}.jpg`;
-  console.log(imgUrl); 
+  let imgUrl =
+    player.position === "DEF"
+      ? `https://sleepercdn.com/images/team_logos/nfl/${player.player_id.toLowerCase()}.png`
+      : `https://sleepercdn.com/content/nfl/players/${player.player_id}.jpg`;
+  // console.log(imgUrl);
   return (
     <>
-        <div
-            onClick={handleClick}
-            className={`p-2 rounded ${boxClass} flex justify-between cursor-pointer items-center`}
-        >
-            <div className="flex items-center">
-                <div className="flex justify-center items-center rounded-full w-10 h-10 overflow-hidden">
-                    <img src={imgUrl} alt={player.name} className="transform scale-110 object-cover w-full h-full" />
-                </div>
-                <p className="font-semibold ml-2">[{player.position}] {player.name}</p>
-            </div>
-            <p>{player.tradeValue}</p>
+      <div
+        onClick={handleClick}
+        className={`p-2 rounded ${boxClass} flex justify-between cursor-pointer items-center`}
+      >
+        <div className="flex items-center">
+          <div className="flex justify-center items-center rounded-full w-10 h-10 overflow-hidden">
+            <img
+              src={imgUrl}
+              alt={player.name}
+              className="transform scale-110 object-cover w-full h-full"
+            />
+          </div>
+          <p className="font-semibold ml-2">
+            [{player.position}] {player.name}
+          </p>
         </div>
-        <BasicModal isOpen={isOpen} setIsOpen={setIsOpen} player={player} />
+        <p>{player.tradeValue}</p>
+      </div>
+      <BasicModal isOpen={isOpen} setIsOpen={setIsOpen} player={player} />
     </>
-);
+  );
 }
-
 
 export default ShowRosters;
