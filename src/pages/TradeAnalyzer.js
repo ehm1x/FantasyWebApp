@@ -126,18 +126,19 @@ const TradeAnalyzer = ({ rosters, currentOwnerId }) => {
   function findTradeColor(tradeValue) {
     let boxClass = "";
     if (tradeValue > 75) {
-      boxClass = "yellow";
+      boxClass = "bg-yellow-500 hover:bg-yellow-200";
     } else if (tradeValue > 50) {
-      boxClass = "purple";
+      boxClass = "bg-purple-500 hover:bg-purple-200";
     } else if (tradeValue > 35) {
-      boxClass = "blue";
+      boxClass = "bg-blue-500 hover:bg-blue-200";
     } else if (tradeValue > 15) {
-      boxClass = "green";
+      boxClass = "bg-green-500 hover:bg-green-200";
     } else {
-      boxClass = "red";
+      boxClass = "bg-red-500 hover:bg-red-200";
     }
     return boxClass;
   }
+
 
   const Player = ({ playerData, playerSelectHandler, isSelected }) => {
     let boxClass = findTradeColor(playerData.tradeValue);
@@ -148,7 +149,7 @@ const TradeAnalyzer = ({ rosters, currentOwnerId }) => {
         onClick={() => playerSelectHandler(playerData)}
         className={`flex justify-between items-center p-2 rounded 
         ${isSelected ? `${selectedColor}` : `${baseColor} `}
-        mb-2 w-full transition-colors duration-5 hover:bg-${boxClass}-200`}
+        mb-2 w-full transition-colors duration-5 ${boxClass}`}
       >
         <span className="flex-grow-3 text-left font-semibold">
         {playerData.position} {playerData.name}
