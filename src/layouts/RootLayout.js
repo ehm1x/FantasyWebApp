@@ -1,8 +1,10 @@
-import { React, useState} from "react";
+import { React, useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
+import { useLeague } from "../hooks";
 import logo from "../2.svg";
 
 export default function RootLayout({ userData }) {
+  const { refreshUserLeagues } = useLeague(userData);
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);
   return (
     <div className="root-layout">
@@ -35,7 +37,7 @@ export default function RootLayout({ userData }) {
           </div>
 
           {userData && userData.avatar ? (
-            <button
+            <div
               className="relative inline-block"
               onClick={() => setIsOverlayOpen(!isOverlayOpen)}
             >
@@ -49,7 +51,7 @@ export default function RootLayout({ userData }) {
                   {userData.username}
                 </div>
               )}
-            </button>
+            </div>
           ) : (
             <div className="flex space-x-4">
               <NavLink
