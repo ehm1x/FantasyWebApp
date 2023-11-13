@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from "react";
+import { React, useState} from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import logo from "../2.svg";
 

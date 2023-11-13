@@ -84,7 +84,6 @@ export function useLeague(userData) {
       const roster = leagueTeams.find(
         (roster) => roster.owner_id === userTeam.user_id
       );
-      let errorOccurred = false;
 
       if (!Array.isArray(roster.players)) {
         console.error(
@@ -175,27 +174,6 @@ class Team {
   }
 }
 
-async function getPlayerData(playerId) {
-  try {
-    const response = await fetch(
-      `http://localhost:8080/api/nfl/player/${playerId}`
-    );
-    const playerData = await response.json();
-
-    if (playerData.err) {
-      console.error(
-        `Error from server when fetching player ${playerId}: `,
-        playerData.err
-      );
-      throw new Error(playerData.err);
-    } else {
-      return playerData;
-    }
-  } catch (error) {
-    console.error(`Error fetching data for player ${playerId}: `, error);
-    throw error;
-  }
-}
 
 async function getDataForAllPlayers(players) {
   try {
