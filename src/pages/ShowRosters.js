@@ -38,8 +38,11 @@ function Players({ team }) {
     <div className="p-4">
       <h3 className="text-xl font-bold mb-4">{team.teamName} Roster</h3>
       <div className="grid grid-cols-2 gap-4">
-        {team.roster.sort((a, b) => b.tradeValue - a.tradeValue).map((player) => (
-          <Player key={player._id} player={player} />
+        {team.roster
+          .filter(player => player !== null) // Filter out null values
+          .sort((a, b) => b.tradeValue - a.tradeValue)
+          .map((player) => (
+            <Player key={player._id} player={player} />
         ))}
       </div>
     </div>
