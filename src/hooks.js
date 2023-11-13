@@ -130,14 +130,17 @@ export function useLeague(userData) {
     rosters,
     leagues,
     confirmedLeague,
+    setSelectedLeague,
+    setConfirmedLeague,
+    setRosters,
   };
 }
 
 class Team {
-  constructor(tName, owner) {
+  constructor(tName, owner, avatar) {
     this.teamName = tName || "";
     this.owner_id = owner;
-    this.avatar_id = 0;
+    this.avatar_id = avatar || "";
     this.roster = [];
     this.totalPts = 0;
     this.totalWeekly = 0;

@@ -11,9 +11,19 @@ export default function Home({
   handleLeagueConfirm,
   confirmedLeague,
   selectedLeague,
-  rosters,
-  userData,
+  setSelectedLeague,
+  setConfirmedLeague,
+  setRosters,
 }) {
+
+  const refreshUserLeagues = () => {
+    console.log('getting called');
+    setSelectedLeague(null);
+    setConfirmedLeague(null);
+    setRosters(null);
+  };
+
+
   return (
     <div className="home flex flex-col items-center justify-top h-screen bg-gray-100 text-gray-800">
       {username ? (
@@ -37,6 +47,9 @@ export default function Home({
                   <NavLink to="/trade-analyzer" className="text-white bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded">
                     Trade Analyzer
                   </NavLink>
+                  <button onClick={refreshUserLeagues} className="text-white bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded">
+            Change League
+          </button>
                 </div>
               </nav>
             </>
@@ -63,3 +76,6 @@ export default function Home({
     </div>
   );
 }
+
+
+
