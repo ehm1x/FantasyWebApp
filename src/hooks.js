@@ -152,19 +152,25 @@ class Team {
   calculateTotalPts() {
     this.totalPts = 0;
     this.roster.forEach((player) => {
-      this.totalPts += player.actualTotalPts;
+      if (player) {
+        this.totalPts += player.actualTotalPts;
+      }
     });
   }
   calculateTradeValue() {
     this.totalTradeValue = 0;
     this.roster.forEach((player) => {
-      this.totalTradeValue += player.tradeValue;
+      if (player) {
+        this.totalTradeValue += player.tradeValue;
+      }
     });
   }
   calculateTotalWeekly() {
     this.totalWeekly = 0;
     this.roster.forEach((player) => {
-      this.totalWeekly += player.avgActualPts;
+      if (player) {
+        this.totalWeekly += player.avgActualPts;
+      }
     });
   }
 }
