@@ -57,9 +57,9 @@ function Player({ player }) {
     boxClass = "bg-yellow-500";
   } else if (player.tradeValue > 50) {
     boxClass = "bg-purple-500";
-  } else if (player.tradeValue > 35) {
+  } else if (player.tradeValue > 25) {
     boxClass = "bg-blue-500";
-  } else if (player.tradeValue > 15) {
+  } else if (player.tradeValue >= 10) {
     boxClass = "bg-green-500";
   } else {
     boxClass = "bg-red-500";

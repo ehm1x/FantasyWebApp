@@ -129,9 +129,9 @@ const TradeAnalyzer = ({ rosters, currentOwnerId }) => {
       boxClass = "bg-yellow-500 hover:bg-yellow-200";
     } else if (tradeValue > 50) {
       boxClass = "bg-purple-500 hover:bg-purple-200";
-    } else if (tradeValue > 35) {
+    } else if (tradeValue > 25) {
       boxClass = "bg-blue-500 hover:bg-blue-200";
-    } else if (tradeValue > 15) {
+    } else if (tradeValue >= 10) {
       boxClass = "bg-green-500 hover:bg-green-200";
     } else {
       boxClass = "bg-red-500 hover:bg-red-200";
