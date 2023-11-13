@@ -15,22 +15,19 @@ export default function RootLayout({ userData }) {
             <div className="pl-5 space-x-4">
               <NavLink
                 to="/trade-analyzer"
-                className="text-white text-sm hover:text-blue-300 font-medium"
-                activeClassName="font-bold"
+                className="text-white text-sm hover:text-blue-300 font-semibold"
               >
                 Trade Analyzer
               </NavLink>
               <NavLink
                 to="/show-rosters"
-                className="text-white text-sm hover:text-blue-300 "
-                activeClassName="font-bold"
+                className="text-white text-sm hover:text-blue-300 font-semibold"
               >
                 Show Rosters
               </NavLink>
               <NavLink
                 to="/team-rankings"
-                className="text-white text-sm hover:text-blue-300 "
-                activeClassName="font-bold"
+                className="text-white text-sm hover:text-blue-300 font-semibold"
               >
                 Team Rankings
               </NavLink>

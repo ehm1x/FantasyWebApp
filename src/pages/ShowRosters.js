@@ -69,7 +69,8 @@ function Player({ player }) {
     event.stopPropagation();
     setIsOpen(true);
   };
-
+  let imgUrl = player.position === 'DEF' ? `https://sleepercdn.com/images/team_logos/nfl/${player.player_id.toLowerCase()}.png` : `https://sleepercdn.com/content/nfl/players/${player.player_id}.jpg`;
+  console.log(imgUrl); 
   return (
     <>
         <div
@@ -78,7 +79,7 @@ function Player({ player }) {
         >
             <div className="flex items-center">
                 <div className="flex justify-center items-center rounded-full w-10 h-10 overflow-hidden">
-                    <img src={`https://sleepercdn.com/content/nfl/players/${player.player_id}.jpg`} alt={player.name} className="transform scale-110 object-cover w-full h-full" />
+                    <img src={imgUrl} alt={player.name} className="transform scale-110 object-cover w-full h-full" />
                 </div>
                 <p className="font-semibold ml-2">[{player.position}] {player.name}</p>
             </div>

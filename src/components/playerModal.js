@@ -464,7 +464,7 @@ const RBStatsTable = ({ player }) => {
       </table>
     );
   };
-
+  let imgUrl = player.position === 'DEF' ? `https://sleepercdn.com/images/team_logos/nfl/${player.player_id.toLowerCase()}.png` : `https://sleepercdn.com/content/nfl/players/${player.player_id}.jpg`;
   return (
     <>
         {isOpen && (
@@ -476,7 +476,7 @@ const RBStatsTable = ({ player }) => {
 
                     <span className="hidden sm:inline-block sm:align-middle sm:h-screen">&#8203;</span>
 
-                    <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-fit sm:w-full">
+                    <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden w-fit shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-fit sm:w-full">
                         <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4 flex justify-between items-start">
                             <div>
                                 <h3 className="text-lg leading-6 font-medium text-gray-900">
@@ -496,9 +496,9 @@ const RBStatsTable = ({ player }) => {
                           
                                 </div>
                             </div>
-                            <img src={`https://sleepercdn.com/content/nfl/players/${player.player_id}.jpg`} alt={player.name} className="w-24 h-auto" />
+                            <img src={imgUrl} alt={player.name} className="w-24 h-auto" />
                         </div>
-                        <div className="px-4 pt-5 pb-4">
+                        <div className="px-4">
                         {renderPlayerStatsTable(player)}
                         </div>
                         
