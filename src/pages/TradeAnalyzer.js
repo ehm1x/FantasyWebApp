@@ -139,23 +139,39 @@ const TradeAnalyzer = ({ rosters, currentOwnerId }) => {
     return boxClass;
   }
 
-
   const Player = ({ playerData, playerSelectHandler, isSelected }) => {
+    let imgUrl =
+      playerData.position === "DEF"
+        ? `https://sleepercdn.com/images/team_logos/nfl/${playerData.player_id.toLowerCase()}.png`
+        : `https://sleepercdn.com/content/nfl/players/${playerData.player_id}.jpg`;
     let boxClass = findTradeColor(playerData.tradeValue);
     const baseColor = `bg-${boxClass}-500 bg-opacity-50 `;
-    const selectedColor = `${baseColor} border-2 border-black`;
+    const selectedColor = `${baseColor} box-border border-2 border-black`;
     return (
-      <button
-        onClick={() => playerSelectHandler(playerData)}
-        className={`flex justify-between items-center p-2 rounded 
-        ${isSelected ? `${selectedColor}` : `${baseColor} `}
-        mb-2 w-full transition-colors duration-5 ${boxClass}`}
-      >
-        <span className="flex-grow-3 text-left font-semibold">
-        {playerData.position} {playerData.name}
-        </span>
-        <span className="flex-grow-1 text-right">{playerData.tradeValue}</span>
-      </button>
+      <>
+        <button
+          onClick={() => playerSelectHandler(playerData)}
+          className={`flex justify-between items-center p-2 rounded 
+          ${isSelected ? `${selectedColor}` : `${baseColor} `}
+          mb-2 w-full transition-colors duration-5 ${boxClass}`}
+        >
+          <div className="flex items-center">
+            <div className="flex justify-center items-center rounded-full w-10 h-10 overflow-hidden">
+              <img
+                src={imgUrl}
+                alt={playerData.name}
+                className="transform scale-110 object-cover w-full h-full"
+              />
+            </div>
+            <span className="ml-2 flex-grow-3 text-left font-semibold">
+              [{playerData.position}] {playerData.name}
+            </span>
+          </div>
+          <span className="flex-grow-1 text-right">
+            {playerData.tradeValue}
+          </span>
+        </button>
+      </>
     );
   };
   const TeamSelector = ({ teams, teamSelectHandler }) => (
