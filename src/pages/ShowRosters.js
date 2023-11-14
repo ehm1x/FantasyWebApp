@@ -59,15 +59,15 @@ function Player({ player }) {
   let boxClass;
 
   if (player.tradeValue > 75) {
-    boxClass = "bg-yellow-500";
+    boxClass = "bg-yellow-500 hover:bg-yellow-200";
   } else if (player.tradeValue > 50) {
-    boxClass = "bg-purple-500";
+    boxClass = "bg-purple-500 hover:bg-purple-200";
   } else if (player.tradeValue > 25) {
-    boxClass = "bg-blue-500";
+    boxClass = "bg-blue-500 hover:bg-blue-200";
   } else if (player.tradeValue >= 10) {
-    boxClass = "bg-green-500";
+    boxClass = "bg-green-500 hover:bg-green-200";
   } else {
-    boxClass = "bg-red-500";
+    boxClass = "bg-red-500 hover:bg-red-200";
   }
 
   // Add opacity to color
