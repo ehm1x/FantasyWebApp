@@ -110,6 +110,7 @@ const TradeAnalyzer = ({ rosters, currentOwnerId }) => {
         )}
       </div>
       {teamData
+        .filter((player) => player !== null)
         .sort((a, b) => b.tradeValue - a.tradeValue)
         .map((player) => (
           <Player
