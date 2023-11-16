@@ -10,283 +10,12 @@ const BasicModal = ({ isOpen, setIsOpen, player }) => {
     setIsOpen(false);
   };
 
-  function findPtsColor(pts) {
-    let color = "";
-    if (pts >= 25) {
-      color = "bg-yellow-500";
-    } else if (pts >= 18 && pts < 25) {
-      color = "bg-purple-500";
-    } else if (pts >= 13 && pts < 18) {
-      color = "bg-blue-500";
-    } else if (pts >= 10 && pts < 13) {
-      color = "bg-green-500";
-    } else {
-      color = "bg-red-500";
-    }
-    return color;
-  }
-
-  function findTargetsColor(pts) {
-    let color = "";
-    if (pts >= 13) {
-      color = "bg-yellow-500";
-    } else if (pts >= 9 && pts < 13) {
-      color = "bg-purple-500";
-    } else if (pts >= 6 && pts < 9) {
-      color = "bg-blue-500";
-    } else if (pts >= 5 && pts < 6) {
-      color = "bg-green-500";
-    } else {
-      color = "bg-red-500";
-    }
-    return color;
-  }
-
-  function findRecColor(pts) {
-    let color = "";
-    if (pts >= 13) {
-      color = "bg-yellow-500";
-    } else if (pts >= 10 && pts < 13) {
-      color = "bg-purple-500";
-    } else if (pts >= 6 && pts < 10) {
-      color = "bg-blue-500";
-    } else if (pts >= 4 && pts < 6) {
-      color = "bg-green-500";
-    } else {
-      color = "bg-red-500";
-    }
-    return color;
-  }
-
-  function findTdColor(pts) {
-    let color = "";
-    if (pts >= 3) {
-      color = "bg-yellow-500";
-    } else if (pts === 2) {
-      color = "bg-purple-500";
-    } else if (pts === 1) {
-      color = "bg-green-500";
-    } else {
-      color = "bg-red-500";
-    }
-    return color;
-  }
-  function findRankColor(rank) {
-    let color = "";
-    if (rank === 1) {
-      color = "bg-yellow-500";
-    } else if (rank <= 3 && rank > 1) {
-      color = "bg-purple-500";
-    } else if (rank <= 8 && rank > 3) {
-      color = "bg-blue-500";
-    } else if (rank <= 12 && rank > 8) {
-      color = "bg-green-500";
-    } else {
-      color = "bg-red-500";
-    }
-    return color;
-  }
-
-  function findPassAttColor(pts) {
-    let color = "";
-    if (pts >= 45) {
-      color = "bg-yellow-500";
-    } else if (pts >= 40 && pts < 45) {
-      color = "bg-purple-500";
-    } else if (pts >= 30 && pts < 40) {
-      color = "bg-blue-500";
-    } else if (pts >= 25 && pts < 30) {
-      color = "bg-green-500";
-    } else {
-      color = "bg-red-500";
-    }
-    return color;
-  }
-  function findPassCompColor(pts) {
-    let color = "";
-    if (pts >= 30) {
-      color = "bg-yellow-500";
-    } else if (pts >= 25 && pts < 30) {
-      color = "bg-purple-500";
-    } else if (pts >= 20 && pts < 25) {
-      color = "bg-blue-500";
-    } else if (pts >= 15 && pts < 20) {
-      color = "bg-green-500";
-    } else {
-      color = "bg-red-500";
-    }
-    return color;
-  }
-
-  function findPassYdColor(pts) {
-    let color = "";
-    if (pts >= 300) {
-      color = "bg-yellow-500";
-    } else if (pts >= 250 && pts < 300) {
-      color = "bg-purple-500";
-    } else if (pts >= 200 && pts < 250) {
-      color = "bg-blue-500";
-    } else if (pts >= 150 && pts < 200) {
-      color = "bg-green-500";
-    } else {
-      color = "bg-red-500";
-    }
-    return color;
-  }
-
-  function findPassTdColor(pts) {
-    let color = "";
-    if (pts >= 4) {
-      color = "bg-yellow-500";
-    } else if (pts === 3) {
-      color = "bg-purple-500";
-    } else if (pts === 2) {
-      color = "bg-blue-500";
-    } else if (pts === 1) {
-      color = "bg-green-500";
-    } else {
-      color = "bg-red-500";
-    }
-    return color;
-  }
-  function findQbRushAttColor(pts) {
-    let color = "";
-    if (pts >= 10) {
-      color = "bg-yellow-500";
-    } else if (pts >= 8 && pts < 10) {
-      color = "bg-purple-500";
-    } else if (pts >= 6 && pts < 8) {
-      color = "bg-blue-500";
-    } else if (pts >= 4 && pts < 6) {
-      color = "bg-green-500";
-    } else {
-      color = "bg-red-500";
-    }
-    return color;
-  }
-  function findQbRushYdColor(pts) {
-    let color = "";
-    if (pts >= 50) {
-      color = "bg-yellow-500";
-    } else if (pts >= 40 && pts < 50) {
-      color = "bg-purple-500";
-    } else if (pts >= 20 && pts < 40) {
-      color = "bg-blue-500";
-    } else if (pts >= 10 && pts < 20) {
-      color = "bg-green-500";
-    } else {
-      color = "bg-red-500";
-    }
-    return color;
-  }
-  function findQbRushTdColor(pts) {
-    let color = "";
-    if (pts >= 2) {
-      color = "bg-yellow-500";
-    } else if (pts === 1) {
-      color = "bg-purple-500";
-    } else {
-      color = "bg-red-500";
-    }
-    return color;
-  }
-  function findQbPtsColor(pts) {
-    let color = "";
-    if (pts >= 30) {
-      color = "bg-yellow-500";
-    } else if (pts >= 25 && pts < 30) {
-      color = "bg-purple-500";
-    } else if (pts >= 20 && pts < 25) {
-      color = "bg-blue-500";
-    } else if (pts >= 15 && pts < 20) {
-      color = "bg-green-500";
-    } else {
-      color = "bg-red-500";
-    }
-    return color;
-  }
-
-  function findRushYdColor(pts) {
-    let color = "";
-    if (pts >= 100) {
-      color = "bg-yellow-500";
-    } else if (pts >= 80 && pts < 100) {
-      color = "bg-purple-500";
-    } else if (pts >= 60 && pts < 80) {
-      color = "bg-blue-500";
-    } else if (pts >= 40 && pts < 60) {
-      color = "bg-green-500";
-    } else {
-      color = "bg-red-500";
-    }
-    return color;
-  }
-
-  function findRushAttColor(pts) {
-    let color = "";
-    if (pts >= 20) {
-      color = "bg-yellow-500";
-    } else if (pts >= 15 && pts < 20) {
-      color = "bg-purple-500";
-    } else if (pts >= 10 && pts < 15) {
-      color = "bg-blue-500";
-    } else if (pts >= 5 && pts < 10) {
-      color = "bg-green-500";
-    } else {
-      color = "bg-red-500";
-    }
-    return color;
-  }
-  function findRbReceptionsColor(pts) {
-    let color = "";
-    if (pts >= 9) {
-      color = "bg-yellow-500";
-    } else if (pts >= 6 && pts < 9) {
-      color = "bg-purple-500";
-    } else if (pts >= 4 && pts < 6) {
-      color = "bg-blue-500";
-    } else if (pts >= 2 && pts < 4) {
-      color = "bg-green-500";
-    } else {
-      color = "bg-red-500";
-    }
-    return color;
-  }
-
-  function findRbTargetColor(pts) {
-    let color = "";
-    if (pts >= 12) {
-      color = "bg-yellow-500";
-    } else if (pts >= 9 && pts < 12) {
-      color = "bg-purple-500";
-    } else if (pts >= 6 && pts < 9) {
-      color = "bg-blue-500";
-    } else if (pts >= 3 && pts < 6) {
-      color = "bg-green-500";
-    } else {
-      color = "bg-red-500";
-    }
-    return color;
-  }
-
-  function findRecTdColor(pts) {
-    let color = "";
-    if (pts >= 2) {
-      color = "bg-yellow-500";
-    } else if (pts === 1) {
-      color = "bg-purple-500";
-    } else {
-      color = "bg-red-500";
-    }
-    return color;
-  }
-
   const colorMap = new Map([
     ["PtsColor", [[25, 18, 13, 10], ["bg-yellow-500", "bg-purple-500", "bg-blue-500", "bg-green-500", "bg-red-500"]]],
     ["TargetsColor", [[13, 9, 6, 5], ["bg-yellow-500", "bg-purple-500", "bg-blue-500", "bg-green-500", "bg-red-500"]]],
     ["RecColor", [[13, 10, 6, 4], ["bg-yellow-500", "bg-purple-500", "bg-blue-500", "bg-green-500", "bg-red-500"]]],
     ["TdColor", [[3, 2, 1], ["bg-yellow-500", "bg-purple-500", "bg-green-500", "bg-red-500"]]],
-    ["RankColor", [[12, 8, 3, 1], ["bg-yellow-500", "bg-purple-500", "bg-blue-500", "bg-green-500", "bg-red-500"]]],
+    ["RankColor", [[12, 8, 3, 1], ["bg-red-500", "bg-green-500", "bg-blue-500", "bg-purple-500", "bg-yellow-500"]]],
     ["PassAttColor", [[45, 40, 30, 25], ["bg-yellow-500", "bg-purple-500", "bg-blue-500", "bg-green-500", "bg-red-500"]]],
     ["PassCompColor", [[30, 25, 20, 15], ["bg-yellow-500", "bg-purple-500", "bg-blue-500", "bg-green-500", "bg-red-500"]]],
     ["PassYdColor", [[300, 250, 200, 150], ["bg-yellow-500", "bg-purple-500", "bg-blue-500", "bg-green-500", "bg-red-500"]]],
@@ -299,7 +28,8 @@ const BasicModal = ({ isOpen, setIsOpen, player }) => {
     ["RushAttColor", [[20, 15, 10, 5], ["bg-yellow-500", "bg-purple-500", "bg-blue-500", "bg-green-500", "bg-red-500"]]],
     ["RbReceptionsColor", [[9, 6, 4, 2], ["bg-yellow-500", "bg-purple-500", "bg-blue-500", "bg-green-500", "bg-red-500"]]],
     ["RbTargetColor", [[12, 9, 6, 3], ["bg-yellow-500", "bg-purple-500", "bg-blue-500", "bg-green-500", "bg-red-500"]]],
-    ["RecTdColor", [[2, 1], ["bg-yellow-500", "bg-purple-500", "bg-red-500"]]]
+    ["RecTdColor", [[2, 1], ["bg-yellow-500", "bg-purple-500", "bg-red-500"]]],
+    ["WrRecYdColor", [[100, 80, 60, 40], ["bg-yellow-500", "bg-purple-500", "bg-blue-500", "bg-green-500", "bg-red-500"]]],
     ]);
     
     function findFunc(funcName, value) {
@@ -343,9 +73,8 @@ const BasicModal = ({ isOpen, setIsOpen, player }) => {
               return null;
             }
 
-            const ptsPpr =
-              weekData.stats.pts_ppr + weekData.stats.pass_td * 2 || 0;
-            const posRank = weekData.stats.pos_rank_ppr || 0;
+            const ptsPpr = weekData.stats.pts_ppr + weekData.stats.pass_td * 2 || 0;
+            const posRank = weekData.stats.pos_rank_ppr || 99;
             const passAtt = weekData.stats.pass_att || 0;
             const passComp = weekData.stats.pass_cmp || 0;
             const passTd = weekData.stats.pass_td || 0;
@@ -404,6 +133,7 @@ const BasicModal = ({ isOpen, setIsOpen, player }) => {
 
   const RBStatsTable = ({ player }) => {
     if(!player) return <p>Player info not found sad</p>
+    
     return (
       <table className="table-fixed ">
         <thead>
@@ -421,51 +151,46 @@ const BasicModal = ({ isOpen, setIsOpen, player }) => {
         </thead>
         <tbody>
           {Object.entries(player.weeklyStats).map(([week, weekData], index) => {
-            // If weekData or weekData.stats is null or undefined, return null
             if (!weekData || !weekData.stats) {
               return null;
             }
-
-            // I'm assuming these color functions exist and work similarly to the ones provided
-            const ptsColor = findPtsColor(weekData.stats.pts_ppr);
-            const rushAttColor = findRushAttColor(weekData.stats.rush_att);
-            const rushYdColor = findRushYdColor(weekData.stats.rush_yd);
-            const tdColor = findTdColor(weekData.stats.rush_td);
-            const targetColor = findRbTargetColor(weekData.stats.rec_tgt);
-            const receptionsColor = findRbReceptionsColor(weekData.stats.rec);
-            const recTdColor = findRecTdColor(weekData.stats.rec_td);
-            const rankColor = findRankColor(weekData.stats.pos_rank_ppr);
-
+  
+            let stats = weekData.stats;
+            const pts = stats.pts_ppr || 0;
+            const rushAtt = stats.rush_att || 0;
+            const rushYd = stats.rush_yd || 0;
+            const rushTd = stats.rush_td || 0 ;
+            const targets = stats.rec_tgt || 0 ;
+            const receptions = stats.rec || 0;
+            const recTd = stats.rec_td || 0;
+            const rank = stats.pos_rank_ppr || 99;
+  
             return (
               <tr key={index}>
                 <td className="border px-4 py-2">{week}</td>
-                <td
-                  className={`border px-4 py-2 ${rushAttColor} bg-opacity-50`}
-                >
-                  {weekData.stats.rush_att || 0}
+                <td className={`border px-4 py-2 ${findFunc("RushAttColor", rushAtt)} bg-opacity-50`}>
+                  {rushAtt}
                 </td>
-                <td className={`border px-4 py-2 ${rushYdColor} bg-opacity-50`}>
-                  {weekData.stats.rush_yd || 0}
+                <td className={`border px-4 py-2 ${findFunc("RushYdColor", rushYd)} bg-opacity-50`}>
+                  {rushYd}
                 </td>
-                <td className={`border px-4 py-2 ${tdColor} bg-opacity-50`}>
-                  {weekData.stats.rush_td || 0}
+                <td className={`border px-4 py-2 ${findFunc("TdColor", rushTd)} bg-opacity-50`}>
+                  {rushTd}
                 </td>
-                <td className={`border px-4 py-2 ${targetColor} bg-opacity-50`}>
-                  {weekData.stats.rec_tgt || 0}
+                <td className={`border px-4 py-2 ${findFunc("TargetsColor", targets)} bg-opacity-50`}>
+                  {targets}
                 </td>
-                <td
-                  className={`border px-4 py-2 ${receptionsColor} bg-opacity-50`}
-                >
-                  {weekData.stats.rec || 0}
+                <td className={`border px-4 py-2 ${findFunc("RecColor", receptions)} bg-opacity-50`}>
+                  {receptions}
                 </td>
-                <td className={`border px-4 py-2 ${recTdColor} bg-opacity-50`}>
-                  {weekData.stats.rec_td || 0}
+                <td className={`border px-4 py-2 ${findFunc("RecTdColor", recTd)} bg-opacity-50`}>
+                  {recTd}
                 </td>
-                <td className={`border px-4 py-2 ${rankColor} bg-opacity-50`}>
-                  {weekData.stats.pos_rank_ppr || 0}
+                <td className={`border px-4 py-2 ${findFunc("RankColor", rank)} bg-opacity-50`}>
+                  {rank}
                 </td>
-                <td className={`border px-4 py-2 ${ptsColor} bg-opacity-50`}>
-                  {weekData.stats.pts_ppr || 0}
+                <td className={`border px-4 py-2 ${findFunc("PtsColor", pts)} bg-opacity-50`}>
+                  {pts}
                 </td>
               </tr>
             );
@@ -475,6 +200,7 @@ const BasicModal = ({ isOpen, setIsOpen, player }) => {
     );
   };
 
+  
   const renderPlayerStatsTable = (player) => {
     switch (player.position) {
       case "QB":
@@ -491,49 +217,51 @@ const BasicModal = ({ isOpen, setIsOpen, player }) => {
   };
 
   const WRStatsTable = ({ player }) => {
-    if(!player) return <p>Player info not found sad</p>
+    if(!player) return <p>Player info not found sad</p>;
+    
     return (
       <table className="table-fixed">
         <thead>
           <tr>
             <th className="w-1/5 px-4 py-2">Week</th>
+            <th className="w-1/5 px-4 py-2">Pts</th>
             <th className="w-1/5 px-4 py-2">Targets</th>
             <th className="w-1/5 px-4 py-2">Rec</th>
+            <th className="w-1/5 px-4 py-2">Rec Yards</th>
             <th className="w-1/5 px-4 py-2">TD's</th>
-            <th className="w-1/5 px-4 py-2">PPR Pts</th>
-            {/* add more columns as needed */}
           </tr>
         </thead>
         <tbody>
           {Object.entries(player.weeklyStats).map(([week, weekData], index) => {
-            // If weekData or weekData.stats is null or undefined, return null
             if (!weekData || !weekData.stats) {
               return null;
             }
-
-            const ptsColor = findPtsColor(weekData.stats.pts_ppr);
-            const targetsColor = findTargetsColor(weekData.stats.rec_tgt);
-            const recColor = findRecColor(weekData.stats.rec);
-            const tdColor = findTdColor(weekData.stats.rec_td);
-
+            
+            const targets = weekData.stats.rec_tgt || 0;
+            const receptions = weekData.stats.rec || 0;
+            const recTd = weekData.stats.rec_td || 0;
+            const pts = weekData.stats.pts_ppr || 0;
+            const recYds = weekData.stats.rec_yd || 0;
+            
             return (
               <tr key={index}>
                 <td className="border px-4 py-2">{week}</td>
-                <td
-                  className={`border px-4 py-2 ${targetsColor} bg-opacity-50`}
-                >
-                  {weekData.stats.rec_tgt || 0}
+                <td className={`border px-4 py-2 ${findFunc("PtsColor", pts)} bg-opacity-50`}>
+                  {pts}
                 </td>
-                <td className={`border px-4 py-2 ${recColor} bg-opacity-50`}>
-                  {weekData.stats.rec || 0}
+                <td className={`border px-4 py-2 ${findFunc("TargetsColor", targets)} bg-opacity-50`}>
+                  {targets}
                 </td>
-                <td className={`border px-4 py-2 ${tdColor} bg-opacity-50`}>
-                  {weekData.stats.rec_td || 0}
+                <td className={`border px-4 py-2 ${findFunc("RecColor", receptions)} bg-opacity-50`}>
+                  {receptions}
                 </td>
-                <td className={`border px-4 py-2 ${ptsColor} bg-opacity-50`}>
-                  {weekData.stats.pts_ppr || 0}
+                <td className={`border px-4 py-2 ${findFunc("WrRecYdColor", recYds)} bg-opacity-50`}>
+                  {recYds}
                 </td>
-                {/* add more data cells as needed */}
+                <td className={`border px-4 py-2 ${findFunc("TdColor", recTd)} bg-opacity-50`}>
+                  {recTd}
+                </td>
+                
               </tr>
             );
           })}
