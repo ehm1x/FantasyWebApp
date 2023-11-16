@@ -4,7 +4,6 @@ import { useLeague } from "../hooks";
 import logo from "../2.svg";
 
 export default function RootLayout({ userData }) {
-  const { refreshUserLeagues } = useLeague(userData);
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);
   return (
     <div className="root-layout">
@@ -29,6 +28,12 @@ export default function RootLayout({ userData }) {
               </NavLink>
               <NavLink
                 to="/team-rankings"
+                className="text-white text-sm hover:text-blue-300 font-semibold"
+              >
+                Team Rankings
+              </NavLink>
+              <NavLink
+                to="/player-rankings"
                 className="text-white text-sm hover:text-blue-300 font-semibold"
               >
                 Team Rankings
