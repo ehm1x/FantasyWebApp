@@ -98,7 +98,7 @@ const BasicModal = ({ isOpen, setIsOpen, player }) => {
     if(!player) return <p>Player info not found sad</p>
     
     return (
-      <table className="table-fixed ">
+      <table className="table-fixed">
         <thead>
           <tr>
             <th className="w-1/10 px-4 py-2">Week</th>
@@ -186,12 +186,12 @@ const BasicModal = ({ isOpen, setIsOpen, player }) => {
       <table className="table-fixed">
         <thead>
           <tr>
-            <th className="w-1/5 px-4 py-2">Week</th>
-            <th className="w-1/5 px-4 py-2">Pts</th>
-            <th className="w-1/5 px-4 py-2">Targets</th>
-            <th className="w-1/5 px-4 py-2">Rec</th>
-            <th className="w-1/5 px-4 py-2">Rec Yards</th>
-            <th className="w-1/5 px-4 py-2">TD's</th>
+            <th className="w-1/6 px-4 py-2">Week</th>
+            <th className="w-1/6 px-4 py-2">Pts</th>
+            <th className="w-1/6 px-4 py-2">Targets</th>
+            <th className="w-1/6 px-4 py-2">Rec</th>
+            <th className="w-1/6 px-4 py-2">Rec Yards</th>
+            <th className="w-1/6 px-4 py-2">TD's</th>
           </tr>
         </thead>
         <tbody>
