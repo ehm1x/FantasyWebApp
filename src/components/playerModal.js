@@ -1,4 +1,5 @@
 import React from "react";
+import { ColorMapper } from "../utils/ColorMapper";
 
 const BasicModal = ({ isOpen, setIsOpen, player }) => {
   if (!player) {
@@ -9,44 +10,6 @@ const BasicModal = ({ isOpen, setIsOpen, player }) => {
     event.stopPropagation();
     setIsOpen(false);
   };
-
-  const colorMap = new Map([
-    ["PtsColor", [[25, 18, 13, 10], ["bg-yellow-500", "bg-purple-500", "bg-blue-500", "bg-green-500", "bg-red-500"]]],
-    ["TargetsColor", [[13, 9, 6, 5], ["bg-yellow-500", "bg-purple-500", "bg-blue-500", "bg-green-500", "bg-red-500"]]],
-    ["RecColor", [[13, 10, 6, 4], ["bg-yellow-500", "bg-purple-500", "bg-blue-500", "bg-green-500", "bg-red-500"]]],
-    ["TdColor", [[3, 2, 1], ["bg-yellow-500", "bg-purple-500", "bg-green-500", "bg-red-500"]]],
-    ["RankColor", [[12, 8, 3, 1], ["bg-red-500", "bg-green-500", "bg-blue-500", "bg-purple-500", "bg-yellow-500"]]],
-    ["PassAttColor", [[45, 40, 30, 25], ["bg-yellow-500", "bg-purple-500", "bg-blue-500", "bg-green-500", "bg-red-500"]]],
-    ["PassCompColor", [[30, 25, 20, 15], ["bg-yellow-500", "bg-purple-500", "bg-blue-500", "bg-green-500", "bg-red-500"]]],
-    ["PassYdColor", [[300, 250, 200, 150], ["bg-yellow-500", "bg-purple-500", "bg-blue-500", "bg-green-500", "bg-red-500"]]],
-    ["PassTdColor", [[4, 3, 2, 1], ["bg-yellow-500", "bg-purple-500", "bg-blue-500", "bg-green-500", "bg-red-500"]]],
-    ["QbRushAttColor", [[10, 8, 6, 4], ["bg-yellow-500", "bg-purple-500", "bg-blue-500", "bg-green-500", "bg-red-500"]]],
-    ["QbRushYdColor", [[50, 40, 20, 10], ["bg-yellow-500", "bg-purple-500", "bg-blue-500", "bg-green-500", "bg-red-500"]]],
-    ["QbRushTdColor", [[2, 1], ["bg-yellow-500", "bg-purple-500", "bg-red-500"]]],
-    ["QbPtsColor", [[30, 25, 20, 15], ["bg-yellow-500", "bg-purple-500", "bg-blue-500", "bg-green-500", "bg-red-500"]]],
-    ["RushYdColor", [[100, 80, 60, 40], ["bg-yellow-500", "bg-purple-500", "bg-blue-500", "bg-green-500", "bg-red-500"]]],
-    ["RushAttColor", [[20, 15, 10, 5], ["bg-yellow-500", "bg-purple-500", "bg-blue-500", "bg-green-500", "bg-red-500"]]],
-    ["RbReceptionsColor", [[9, 6, 4, 2], ["bg-yellow-500", "bg-purple-500", "bg-blue-500", "bg-green-500", "bg-red-500"]]],
-    ["RbTargetColor", [[12, 9, 6, 3], ["bg-yellow-500", "bg-purple-500", "bg-blue-500", "bg-green-500", "bg-red-500"]]],
-    ["RecTdColor", [[2, 1], ["bg-yellow-500", "bg-purple-500", "bg-red-500"]]],
-    ["WrRecYdColor", [[100, 80, 60, 40], ["bg-yellow-500", "bg-purple-500", "bg-blue-500", "bg-green-500", "bg-red-500"]]],
-    ]);
-    
-    function findFunc(funcName, value) {
-    const [breakpoints, colors] = colorMap.get(funcName);
-    return findColor(value, breakpoints, colors);
-    }
-
-  function findColor(value, breakpoints, colors) {
-    for (let i = 0; i < breakpoints.length; i++) {
-      if (value >= breakpoints[i]) {
-        return colors[i];
-      }
-    }
-    return colors[colors.length - 1] || "";
-  }
-
-  
 
   const QBStatsTable = ({ player }) => {
     if(!player) return <p>Player info not found sad</p>
@@ -87,39 +50,39 @@ const BasicModal = ({ isOpen, setIsOpen, player }) => {
               <tr>
                 <td className="border px-4 py-2">{week}</td>
             
-                <td className={`border px-4 py-2 ${findFunc("RankColor", posRank)} bg-opacity-50`}>
+                <td className={`border px-4 py-2 ${ColorMapper.findFunc("RankColor", posRank)} bg-opacity-50`}>
                   {posRank}  
                 </td>
             
-                <td className={`border px-4 py-2 ${findFunc("PassAttColor", passAtt)} bg-opacity-50`}>
+                <td className={`border px-4 py-2 ${ColorMapper.findFunc("PassAttColor", passAtt)} bg-opacity-50`}>
                   {passAtt}
                 </td>
             
-                <td className={`border px-4 py-2 ${findFunc("PassCompColor", passComp)} bg-opacity-50`}>
+                <td className={`border px-4 py-2 ${ColorMapper.findFunc("PassCompColor", passComp)} bg-opacity-50`}>
                    {passComp}
                 </td>
             
-                <td className={`border px-4 py-2 ${findFunc("PassYdColor", passYd)} bg-opacity-50`}>
+                <td className={`border px-4 py-2 ${ColorMapper.findFunc("PassYdColor", passYd)} bg-opacity-50`}>
                   {passYd}
                 </td>
             
-                <td className={`border px-4 py-2 ${findFunc("PassTdColor", passTd)} bg-opacity-50`}>
+                <td className={`border px-4 py-2 ${ColorMapper.findFunc("PassTdColor", passTd)} bg-opacity-50`}>
                   {passTd}
                 </td>
             
-                <td className={`border px-4 py-2 ${findFunc("QbRushTdColor", rushTd)} bg-opacity-50`}>
+                <td className={`border px-4 py-2 ${ColorMapper.findFunc("QbRushTdColor", rushTd)} bg-opacity-50`}>
                   {rushTd}
                 </td>
             
-                <td className={`border px-4 py-2 ${findFunc("QbRushAttColor", rushAtt)} bg-opacity-50`}>
+                <td className={`border px-4 py-2 ${ColorMapper.findFunc("QbRushAttColor", rushAtt)} bg-opacity-50`}>
                   {rushAtt}
                 </td>
             
-                <td className={`border px-4 py-2 ${findFunc("QbRushYdColor", rushYd)} bg-opacity-50`}>
+                <td className={`border px-4 py-2 ${ColorMapper.findFunc("QbRushYdColor", rushYd)} bg-opacity-50`}>
                   {rushYd}  
                 </td>
             
-                <td className={`border px-4 py-2 ${findFunc("QbPtsColor", ptsPpr)} bg-opacity-50`}>
+                <td className={`border px-4 py-2 ${ColorMapper.findFunc("QbPtsColor", ptsPpr)} bg-opacity-50`}>
                   {ptsPpr.toFixed(2)}
                 </td>
               
@@ -168,28 +131,28 @@ const BasicModal = ({ isOpen, setIsOpen, player }) => {
             return (
               <tr key={index}>
                 <td className="border px-4 py-2">{week}</td>
-                <td className={`border px-4 py-2 ${findFunc("RushAttColor", rushAtt)} bg-opacity-50`}>
+                <td className={`border px-4 py-2 ${ColorMapper.findFunc("RushAttColor", rushAtt)} bg-opacity-50`}>
                   {rushAtt}
                 </td>
-                <td className={`border px-4 py-2 ${findFunc("RushYdColor", rushYd)} bg-opacity-50`}>
+                <td className={`border px-4 py-2 ${ColorMapper.findFunc("RushYdColor", rushYd)} bg-opacity-50`}>
                   {rushYd}
                 </td>
-                <td className={`border px-4 py-2 ${findFunc("TdColor", rushTd)} bg-opacity-50`}>
+                <td className={`border px-4 py-2 ${ColorMapper.findFunc("TdColor", rushTd)} bg-opacity-50`}>
                   {rushTd}
                 </td>
-                <td className={`border px-4 py-2 ${findFunc("TargetsColor", targets)} bg-opacity-50`}>
+                <td className={`border px-4 py-2 ${ColorMapper.findFunc("TargetsColor", targets)} bg-opacity-50`}>
                   {targets}
                 </td>
-                <td className={`border px-4 py-2 ${findFunc("RecColor", receptions)} bg-opacity-50`}>
+                <td className={`border px-4 py-2 ${ColorMapper.findFunc("RecColor", receptions)} bg-opacity-50`}>
                   {receptions}
                 </td>
-                <td className={`border px-4 py-2 ${findFunc("RecTdColor", recTd)} bg-opacity-50`}>
+                <td className={`border px-4 py-2 ${ColorMapper.findFunc("RecTdColor", recTd)} bg-opacity-50`}>
                   {recTd}
                 </td>
-                <td className={`border px-4 py-2 ${findFunc("RankColor", rank)} bg-opacity-50`}>
+                <td className={`border px-4 py-2 ${ColorMapper.findFunc("RankColor", rank)} bg-opacity-50`}>
                   {rank}
                 </td>
-                <td className={`border px-4 py-2 ${findFunc("PtsColor", pts)} bg-opacity-50`}>
+                <td className={`border px-4 py-2 ${ColorMapper.findFunc("PtsColor", pts)} bg-opacity-50`}>
                   {pts}
                 </td>
               </tr>
@@ -246,19 +209,19 @@ const BasicModal = ({ isOpen, setIsOpen, player }) => {
             return (
               <tr key={index}>
                 <td className="border px-4 py-2">{week}</td>
-                <td className={`border px-4 py-2 ${findFunc("PtsColor", pts)} bg-opacity-50`}>
+                <td className={`border px-4 py-2 ${ColorMapper.findFunc("PtsColor", pts)} bg-opacity-50`}>
                   {pts}
                 </td>
-                <td className={`border px-4 py-2 ${findFunc("TargetsColor", targets)} bg-opacity-50`}>
+                <td className={`border px-4 py-2 ${ColorMapper.findFunc("TargetsColor", targets)} bg-opacity-50`}>
                   {targets}
                 </td>
-                <td className={`border px-4 py-2 ${findFunc("RecColor", receptions)} bg-opacity-50`}>
+                <td className={`border px-4 py-2 ${ColorMapper.findFunc("RecColor", receptions)} bg-opacity-50`}>
                   {receptions}
                 </td>
-                <td className={`border px-4 py-2 ${findFunc("WrRecYdColor", recYds)} bg-opacity-50`}>
+                <td className={`border px-4 py-2 ${ColorMapper.findFunc("WrRecYdColor", recYds)} bg-opacity-50`}>
                   {recYds}
                 </td>
-                <td className={`border px-4 py-2 ${findFunc("TdColor", recTd)} bg-opacity-50`}>
+                <td className={`border px-4 py-2 ${ColorMapper.findFunc("TdColor", recTd)} bg-opacity-50`}>
                   {recTd}
                 </td>
                 
