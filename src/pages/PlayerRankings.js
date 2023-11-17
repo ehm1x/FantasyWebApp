@@ -21,13 +21,13 @@ function PlayerRankings({ rosters }) {
           <tr className="border-b">
             <th className="pb-2">Name</th>
             <th
-              className="pb-2 cursor-pointer"
+              className="pb-2 px-5 cursor-pointer"
               onClick={() => setSortField("pos_rank_ppr")}
             >
               Rank
             </th>
             <th
-              className="pb-2 cursor-pointer"
+              className="pb-2 px-5 cursor-pointer"
               onClick={() => setSortField("pts_ppr")}
             >
               Season Total
