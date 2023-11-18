@@ -15,7 +15,7 @@ const BasicModal = ({ isOpen, setIsOpen, player }) => {
     ["TargetsColor", [[13, 9, 6, 5], ["bg-yellow-500", "bg-purple-500", "bg-blue-500", "bg-green-500", "bg-red-500"]]],
     ["RecColor", [[13, 10, 6, 4], ["bg-yellow-500", "bg-purple-500", "bg-blue-500", "bg-green-500", "bg-red-500"]]],
     ["TdColor", [[3, 2, 1], ["bg-yellow-500", "bg-purple-500", "bg-green-500", "bg-red-500"]]],
-    ["RankColor", [[12, 8, 3, 1], ["bg-red-500", "bg-green-500", "bg-blue-500", "bg-purple-500", "bg-yellow-500"]]],
+    ["RankColor", [[12, 8, 3, 2, 1], ["bg-red-500", "bg-green-500", "bg-blue-500", "bg-purple-500", "bg-yellow-500"]]],
     ["PassAttColor", [[45, 40, 30, 25], ["bg-yellow-500", "bg-purple-500", "bg-blue-500", "bg-green-500", "bg-red-500"]]],
     ["PassCompColor", [[30, 25, 20, 15], ["bg-yellow-500", "bg-purple-500", "bg-blue-500", "bg-green-500", "bg-red-500"]]],
     ["PassYdColor", [[300, 250, 200, 150], ["bg-yellow-500", "bg-purple-500", "bg-blue-500", "bg-green-500", "bg-red-500"]]],
@@ -139,6 +139,7 @@ const BasicModal = ({ isOpen, setIsOpen, player }) => {
         <thead>
           <tr>
             <th className="w-1/10 px-4 py-2">Week</th>
+            <th className="w-1/10 px-4 py-2">Rank</th>
             <th className="w-1/10 px-4 py-2">Rush Att</th>
             <th className="w-1/10 px-4 py-2">Rush YD</th>
             <th className="w-1/10 px-4 py-2">TD's</th>
@@ -170,6 +171,9 @@ const BasicModal = ({ isOpen, setIsOpen, player }) => {
                 <td className="border px-4 py-2">{week}</td>
                 <td className={`border px-4 py-2 ${findFunc("RushAttColor", rushAtt)} bg-opacity-50`}>
                   {rushAtt}
+                </td>
+                <td className={`border px-4 py-2 ${findFunc("RankColor", rank)} bg-opacity-50`}>
+                  {rank}
                 </td>
                 <td className={`border px-4 py-2 ${findFunc("RushYdColor", rushYd)} bg-opacity-50`}>
                   {rushYd}
