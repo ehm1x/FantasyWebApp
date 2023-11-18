@@ -10,6 +10,7 @@ import TradeAnalyzer from "./pages/TradeAnalyzer";
 
 import { useUser, useLeague } from './hooks';
 import TeamRankings from "./pages/teamrankings";
+import PlayerRankings from "./pages/PlayerRankings";
 
 const App = () => {
   const { username, handleUsernameChange, handleConfirmUser,  userData } = useUser();
@@ -43,6 +44,7 @@ const App = () => {
         <Route path="show-rosters" element={ confirmedLeague && rosters ? <ShowRosters rosters = {rosters}/> : HomeComponent} /> 
         <Route path="trade-analyzer" element={ confirmedLeague && rosters ? <TradeAnalyzer rosters = {rosters} currentOwnerId={userData.user_id}/> : HomeComponent} />
         <Route path="team-rankings" element={ confirmedLeague && rosters ? <TeamRankings rosters = {rosters}/> : HomeComponent}/> 
+        <Route path="player-rankings" element={ confirmedLeague && rosters ? <PlayerRankings rosters = {rosters}/> : HomeComponent}/>
       </Route>
     )
   );
