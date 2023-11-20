@@ -147,7 +147,6 @@ const BasicModal = ({ isOpen, setIsOpen, player }) => {
             <th className="w-1/10 px-4 py-2">Targets</th>
             <th className="w-1/10 px-4 py-2">Rec</th>
             <th className="w-1/10 px-4 py-2">Rec TD</th>
-            <th className="w-1/10 px-4 py-2">Rank</th>
             <th className="w-1/10 px-4 py-2">PPR Pts</th>
           </tr>
         </thead>
@@ -170,6 +169,9 @@ const BasicModal = ({ isOpen, setIsOpen, player }) => {
             return (
               <tr key={index}>
                 <td className="border px-4 py-2">{week}</td>
+                <td className={`border px-4 py-2 ${ColorMapper.findFunc("RankColor", rank, 1)} bg-opacity-50`}>
+                  {rank}
+                </td>
                 <td className={`border px-4 py-2 ${ColorMapper.findFunc("RushAttColor", rushAtt)} bg-opacity-50`}>
                   {rushAtt}
                 </td>
@@ -187,9 +189,6 @@ const BasicModal = ({ isOpen, setIsOpen, player }) => {
                 </td>
                 <td className={`border px-4 py-2 ${ColorMapper.findFunc("RecTdColor", recTd)} bg-opacity-50`}>
                   {recTd}
-                </td>
-                <td className={`border px-4 py-2 ${ColorMapper.findFunc("RankColor", rank)} bg-opacity-50`}>
-                  {rank}
                 </td>
                 <td className={`border px-4 py-2 ${ColorMapper.findFunc("PtsColor", pts)} bg-opacity-50`}>
                   {pts}
