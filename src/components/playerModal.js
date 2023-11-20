@@ -50,7 +50,7 @@ const BasicModal = ({ isOpen, setIsOpen, player }) => {
               <tr>
                 <td className="border px-4 py-2">{week}</td>
             
-                <td className={`border px-4 py-2 ${ColorMapper.findFunc("RankColor", posRank)} bg-opacity-50`}>
+                <td className={`border px-4 py-2 ${ColorMapper.findFunc("RankColor", posRank, 1)} bg-opacity-50`}>
                   {posRank}  
                 </td>
             
