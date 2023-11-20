@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 // Define your API_BASE outside the hook
 const API_BASE = "https://api.sleeper.app/v1";
 
+let allPlayers = []; 
+
 export function useUser() {
   const [username, setUsername] = useState(null);
   const [inputUsername, setInputUsername] = useState("");
@@ -101,6 +103,9 @@ export function useLeague(userData) {
         );
         return;
       }
+      team.roster.forEach((player) => {
+         allPlayers.push(player);
+      } );
 
       team.calculateTotalPts();
       team.calculateTotalWeekly();
@@ -123,6 +128,10 @@ export function useLeague(userData) {
     setConfirmedLeague(true);
   };
 
+  allPlayers = allPlayers.filter((player) => 
+    player !== null && player.seasonStats
+  ); 
+
   return {
     selectedLeague,
     handleLeagueChange,
@@ -133,6 +142,7 @@ export function useLeague(userData) {
     setSelectedLeague,
     setConfirmedLeague,
     setRosters,
+    allPlayers
   };
 }
 

@@ -16,7 +16,7 @@ const App = () => {
   const { username, handleUsernameChange, handleConfirmUser,  userData } = useUser();
   
   const { selectedLeague, handleLeagueChange, handleLeagueConfirm, rosters, leagues, confirmedLeague, setSelectedLeague, setConfirmedLeague, 
-  setRosters} = useLeague(userData);
+  setRosters, allPlayers} = useLeague(userData);
 
   const HomeComponent = (
     <Home
@@ -44,7 +44,7 @@ const App = () => {
         <Route path="show-rosters" element={ confirmedLeague && rosters ? <ShowRosters rosters = {rosters}/> : HomeComponent} /> 
         <Route path="trade-analyzer" element={ confirmedLeague && rosters ? <TradeAnalyzer rosters = {rosters} currentOwnerId={userData.user_id}/> : HomeComponent} />
         <Route path="team-rankings" element={ confirmedLeague && rosters ? <TeamRankings rosters = {rosters}/> : HomeComponent}/> 
-        <Route path="player-rankings" element={ confirmedLeague && rosters ? <PlayerRankings rosters = {rosters}/> : HomeComponent}/>
+        <Route path="player-rankings" element={ confirmedLeague && rosters ? <PlayerRankings rosters = {rosters} allPlayers = {allPlayers} /> : HomeComponent}/>
       </Route>
     )
   );
