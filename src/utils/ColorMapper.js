@@ -4,7 +4,7 @@ export class ColorMapper {
         TargetsColor: [13, 9, 6, 5],   
         RecColor: [13, 10, 6, 4],
         TdColor: [3, 2, 1],
-        RankColor: [2,3,8,12,999],
+        RankColor: [2,3,8,12],
         PassAttColor: [45, 40, 30, 25],
         PassCompColor: [30, 25, 20, 15],
         PassYdColor: [300, 250, 200, 150],
@@ -18,7 +18,10 @@ export class ColorMapper {
         RbReceptionsColor: [9, 6, 4, 2],
         RbTargetColor: [12, 9, 6, 3],
         RecTdColor: [2, 1],
-        WrRecYdColor: [100, 80, 60, 40]
+        WrRecYdColor: [100, 80, 60, 40],
+        SeasonRankColor:[5,20,45,70],
+        SeasonAvgColor:[20,15,10,5],
+        SeasonTdsColor:[8,5,3,1],
       };
 
         static findFunc(funcName, value, reverse = 0) {
@@ -28,8 +31,8 @@ export class ColorMapper {
         }
 
         static findColor(value, breakpoints, reverse) {
-            const colors = ['bg-yellow-500', 'bg-purple-500', 'bg-blue-500', 'bg-green-500', 'bg-red-500'];
-            const defaultColor = 'bg-red-500';
+            const colors = ['bg-yellow-500 bg-opacity-50', 'bg-purple-500 bg-opacity-50', 'bg-blue-500 bg-opacity-50', 'bg-green-500 bg-opacity-50', 'bg-red-500 bg-opacity-50'];
+            const defaultColor = 'bg-red-500 bg-opacity-50';
             for (let i = 0; i < breakpoints.length; i++) {
                 if (reverse ? value <= breakpoints[i] : value >= breakpoints[i]) {
                     return colors[i];
