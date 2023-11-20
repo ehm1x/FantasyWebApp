@@ -1,6 +1,5 @@
 import { React, useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
-import { useLeague } from "../hooks";
 import logo from "../2.svg";
 
 export default function RootLayout({ userData }) {
