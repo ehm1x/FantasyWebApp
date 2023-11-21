@@ -22,6 +22,8 @@ export class ColorMapper {
         SeasonRankColor:[5,20,45,70],
         SeasonAvgColor:[20,15,10,5],
         SeasonTdsColor:[8,5,3,1],
+        SeasonIntColor:[10,8,5,3],
+
       };
 
         static findFunc(funcName, value, reverse = 0) {

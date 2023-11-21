@@ -287,8 +287,9 @@ function PlayerRankings({ rosters }) {
               </td>
               <td
                 className={`pl-2 border-r border-white ${ColorMapper.findFunc(
-                  "PassIntColor",
-                  player.seasonStats?.stats?.pass_int / player.activeWeeks ?? 0
+                  "SeasonIntColor",
+                  player.seasonStats?.stats?.pass_int / player.activeWeeks ?? 0, 
+                  
                 )}`}
               >
                 {player.seasonStats?.stats?.pass_int ?? 0}
