@@ -3,7 +3,7 @@ import { ColorMapper } from "../utils/ColorMapper";
 
 function PlayerRankings({ rosters }) {
   const [sortField, setSortField] = useState("rank_ppr");
-  const [sortPosition, setSortPosition] = useState(null);
+  const [sortPositions, setSortPositions] = useState([]);
   const [sortDirection, setSortDirection] = useState(-1);
 
   let allPlayers = rosters
@@ -11,13 +11,13 @@ function PlayerRankings({ rosters }) {
     .reduce((a, b) => a.concat(b), [])
     .filter((player) => player !== null && player.seasonStats);
 
-  const sortedPlayers = [...allPlayers]
+    const sortedPlayers = [...allPlayers]
     .filter((player) => {
       const hasSortField =
         player.seasonStats.stats[sortField] !== undefined &&
         player.seasonStats.stats[sortField] !== null;
-      const matchesPosition = sortPosition
-        ? player.position === sortPosition
+      const matchesPosition = sortPositions.length > 0
+        ? sortPositions.includes(player.position)
         : true;
       return hasSortField && matchesPosition;
     })
@@ -38,6 +38,25 @@ function PlayerRankings({ rosters }) {
     setSortField(field);
     setSortDirection(sortDirection * -1);
   };
+  const columns = [
+    { label: "Position", sortValue: null},
+    { label: "Name", sortValue: null },
+    { label: "Rank", sortValue: "rank_ppr" },
+    { label: "Season Total", sortValue: "pts_ppr" },
+    { label: "Weekly Average", sortValue: "pts_ppr" },
+    { label: "Targets", sortValue: "rec_tgt" },
+    { label: "Receptions", sortValue: "rec" },
+    { label: "Receiving Yards", sortValue: "rec_yd" },
+    { label: "Rec TD's", sortValue: "rec_td" },
+    { label: "Rush Att", sortValue: "rush_att" },
+    { label: "Rush Yd's", sortValue: "rush_yd" },
+    { label: "Rush TD's", sortValue: "rush_td" },
+    { label: "Pass Att", sortValue: "pass_att" },
+    { label: "Pass Comp", sortValue: "pass_cmp" },
+    { label: "Pass YD's", sortValue: "pass_yd" },
+    { label: "Pass TD", sortValue: "pass_td" },
+    { label: "TD/INT", sortValue: "pass_int" },
+  ];
 
   return (
     <div className="bg-white rounded p-4">
@@ -47,114 +66,39 @@ function PlayerRankings({ rosters }) {
       <div className="mb-4">
         {["QB", "WR", "RB", "TE"].map((position) => (
           <button
-            className={`px-4 py-2 m-1 ${
-              sortPosition === position ? "bg-green-200" : ""
+            className={`px-4 py-2 m-1 rounded ${
+              sortPositions.includes(position)
+                ? "bg-blue-500 bg-opacity-50"
+                : "bg-gray-200"
             }`}
-            onClick={() =>
-              setSortPosition(sortPosition === position ? null : position)
-            }
+            onClick={() => {
+              if (sortPositions.includes(position)) {
+                setSortPositions(
+                  sortPositions.filter((pos) => pos !== position)
+                );
+              } else {
+                setSortPositions([...sortPositions, position]);
+              }
+            }}
           >
             {position}
           </button>
+
         ))}
+       
       </div>
       <table className="w-full px-5 text-left">
-        {" "}
-        {/* Change
-       to w-fit soon*/}
         <thead>
           <tr className="border-b">
-            <th className="pb-2">Name</th>
-            <th
-              className="pb-2 pr-5 cursor-pointer"
-              onClick={() => handleSort("rank_ppr")}
-            >
-              Rank
-            </th>
-            <th
-              className="pb-2 pr-5 cursor-pointer"
-              onClick={() => handleSort("pts_ppr")}
-            >
-              Season Total
-            </th>
-            <th
-              className="pb-2 pr-5 cursor-pointer"
-              onClick={() => handleSort("pts_ppr")}
-            >
-              Weekly Average
-            </th>
-            <th
-              className="pb-2 pr-5 cursor-pointer"
-              onClick={() => handleSort("rec_tgt")}
-            >
-              Targets
-            </th>
-            <th
-              className="pb-2 pr-5 cursor-pointer"
-              onClick={() => handleSort("rec")}
-            >
-              Receptions
-            </th>
-            <th
-              className="pb-2 pr-5 cursor-pointer"
-              onClick={() => handleSort("rec_yd")}
-            >
-              Receiving Yards
-            </th>
-            <th
-              className="pb-2 pr-5 cursor-pointer"
-              onClick={() => handleSort("rec_td")}
-            >
-              Rec TD's
-            </th>
-            <th
-              className="pb-2 pr-5 cursor-pointer"
-              onClick={() => handleSort("rush_att")}
-            >
-              Rush Att
-            </th>
-            <th
-              className="pb-2 pr-5 cursor-pointer"
-              onClick={() => handleSort("rush_yd")}
-            >
-              Rush Yd's
-            </th>
-            <th
-              className="pb-2 pr-5 cursor-pointer"
-              onClick={() => handleSort("rush_td")}
-            >
-              Rush TD's
-            </th>
-            <th
-              className="pb-2 pr-5 cursor-pointer"
-              onClick={() => handleSort("pass_att")}
-            >
-              Pass Att
-            </th>
-            <th
-              className="pb-2 pr-5 cursor-pointer"
-              onClick={() => handleSort("pass_cmp")}
-            >
-              Pass Comp
-            </th>
-            <th
-              className="pb-2 pr-5 cursor-pointer"
-              onClick={() => handleSort("pass_yd")}
-            >
-              Pass YD's
-            </th>
-            <th
-              className="pb-2 pr-5 cursor-pointer"
-              onClick={() => handleSort("pass_td")}
-            >
-              Pass TD
-            </th>
-            <th
-              className="pb-2 pr-5 cursor-pointer"
-              onClick={() => handleSort("pass_int")}
-            >
-              INT
-            </th>
+            {columns.map(({ label, sortValue }) => (
+              <th
+                key={label}
+                className="pb-2 pl-1 pr-5 cursor-pointer hover:bg-gray-100 bg-opacity-50"
+                onClick={() => sortValue && handleSort(sortValue)}
+              >
+                {label} {sortField === sortValue ? (sortDirection > 0 ? '↓' : '↑') : ``}
+              </th>
+            ))}
           </tr>
         </thead>
         <tbody>
@@ -163,6 +107,11 @@ function PlayerRankings({ rosters }) {
               key={player.name}
               className="border-b border-white hover:bg-gray-50"
             >
+              <td 
+                className={`pl-2 py-2 border-r border-white bg-gray-100`}
+              >
+                {player.position}
+                </td> 
               <td
                 className={`pl-2 py-2 border-r border-white ${ColorMapper.findFunc(
                   "SeasonRankColor",
@@ -222,10 +171,10 @@ function PlayerRankings({ rosters }) {
                 {player.seasonStats?.stats?.rec_yd ?? 0}
               </td>
               <td
-                className={ColorMapper.findFunc(
+                className={`pl-2 border-r border-white ${ColorMapper.findFunc(
                   "SeasonTdsColor",
                   player.seasonStats?.stats?.rec_td ?? 0
-                )}
+                )}`}
               >
                 {player.seasonStats?.stats?.rec_td ?? 0}
               </td>
@@ -247,8 +196,8 @@ function PlayerRankings({ rosters }) {
               </td>
               <td
                 className={`pl-2 border-r border-white ${ColorMapper.findFunc(
-                  "RushTdColor",
-                  player.seasonStats?.stats?.rush_td / player.activeWeeks ?? 0
+                  "SeasonTdsColor",
+                  player.seasonStats?.stats?.rush_td ?? 0
                 )}`}
               >
                 {player.seasonStats?.stats?.rush_td ?? 0}
@@ -256,15 +205,17 @@ function PlayerRankings({ rosters }) {
               <td
                 className={`pl-2 border-r border-white ${ColorMapper.findFunc(
                   "PassAttColor",
-                  player.seasonStats?.stats?.pass_att / player.activeWeeks ?? 0
+                  player.seasonStats?.stats?.pass_att /
+                    (player.activeWeeks - 2) ?? 0
                 )}`}
               >
                 {player.seasonStats?.stats?.pass_att ?? 0}
               </td>
               <td
                 className={`pl-2 border-r border-white ${ColorMapper.findFunc(
-                  "PassCmpColor",
-                  player.seasonStats?.stats?.pass_cmp / player.activeWeeks ?? 0
+                  "PassCompColor",
+                  player.seasonStats?.stats?.pass_cmp /
+                    (player.activeWeeks - 1) ?? 0
                 )}`}
               >
                 {player.seasonStats?.stats?.pass_cmp ?? 0}
@@ -288,8 +239,8 @@ function PlayerRankings({ rosters }) {
               <td
                 className={`pl-2 border-r border-white ${ColorMapper.findFunc(
                   "SeasonIntColor",
-                  player.seasonStats?.stats?.pass_int / player.activeWeeks ?? 0, 
-                  
+                  player.seasonStats?.stats?.pass_int ?? 0,
+                  1
                 )}`}
               >
                 {player.seasonStats?.stats?.pass_int ?? 0}
