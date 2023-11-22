@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 // Define your API_BASE outside the hook
 const API_BASE = "https://api.sleeper.app/v1";
 
-let allPlayers = []; 
 
 export function useUser() {
   const [username, setUsername] = useState(null);
@@ -37,6 +36,7 @@ export function useLeague(userData) {
   const [selectedLeague, setSelectedLeague] = useState(null);
   const [rosters, setRosters] = useState(null);
   const [confirmedLeague, setConfirmedLeague] = useState(false);
+  let allPlayers = []; 
 
   useEffect(() => {
     if (userData && userData.user_id) fetchUserLeagues(userData.user_id);
