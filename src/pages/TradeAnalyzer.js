@@ -103,7 +103,7 @@ const TradeAnalyzer = ({ rosters, currentOwnerId }) => {
         {showHeaderButton && (
           <button
             onClick={headerButtonHandler}
-            className="text-white bg-blue-500 hover:bg-blue-600 px-2 py-1 rounded"
+            className="text-white bg-blue-400 hover:bg-blue-600 px-2 py-1 rounded"
           >
             Return
           </button>
@@ -183,7 +183,7 @@ const TradeAnalyzer = ({ rosters, currentOwnerId }) => {
         <button
           key={team.owner_id}
           onClick={() => teamSelectHandler(team)}
-          className="w-full text-white bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded"
+          className="w-full text-white bg-blue-500 bg-opacity-100 hover:bg-blue-400 px-4 py-2 rounded"
         >
           <div className="flex items-center">
          <Avatar avatarId = {team.avatar_id}/> <div className ="pl-4"> {team.teamName} </div>

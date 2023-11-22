@@ -35,7 +35,7 @@ export default function RootLayout({ userData }) {
                 to="/player-rankings"
                 className="text-white text-sm hover:text-blue-300 font-semibold"
               >
-                Team Rankings
+                Player Rankings
               </NavLink>
             </div>
           </div>
