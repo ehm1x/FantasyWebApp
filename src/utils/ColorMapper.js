@@ -22,7 +22,7 @@ export class ColorMapper {
         SeasonRankColor:[5,20,45,70],
         SeasonAvgColor:[20,15,10,5],
         SeasonTdsColor:[8,5,3,1],
-        SeasonIntColor:[10,8,5,3],
+        SeasonIntColor:[3,5,8,10],
 
       };
 

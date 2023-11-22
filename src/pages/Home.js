@@ -1,4 +1,4 @@
-import LeagueSelection from "./SelectLeague";
+import LeagueSelection from "../components/SelectLeague";
 import { NavLink, Outlet } from "react-router-dom";
 
 export default function Home({
