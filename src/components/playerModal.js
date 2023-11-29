@@ -11,44 +11,6 @@ const BasicModal = ({ isOpen, setIsOpen, player }) => {
     setIsOpen(false);
   };
 
-  const colorMap = new Map([
-    ["PtsColor", [[25, 18, 13, 10], ["bg-yellow-500", "bg-purple-500", "bg-blue-500", "bg-green-500", "bg-red-500"]]],
-    ["TargetsColor", [[13, 9, 6, 5], ["bg-yellow-500", "bg-purple-500", "bg-blue-500", "bg-green-500", "bg-red-500"]]],
-    ["RecColor", [[13, 10, 6, 4], ["bg-yellow-500", "bg-purple-500", "bg-blue-500", "bg-green-500", "bg-red-500"]]],
-    ["TdColor", [[3, 2, 1], ["bg-yellow-500", "bg-purple-500", "bg-green-500", "bg-red-500"]]],
-    ["RankColor", [[12, 8, 3, 1], ["bg-red-500", "bg-green-500", "bg-blue-500", "bg-purple-500", "bg-yellow-500"]]],
-    ["PassAttColor", [[45, 40, 30, 25], ["bg-yellow-500", "bg-purple-500", "bg-blue-500", "bg-green-500", "bg-red-500"]]],
-    ["PassCompColor", [[30, 25, 20, 15], ["bg-yellow-500", "bg-purple-500", "bg-blue-500", "bg-green-500", "bg-red-500"]]],
-    ["PassYdColor", [[300, 250, 200, 150], ["bg-yellow-500", "bg-purple-500", "bg-blue-500", "bg-green-500", "bg-red-500"]]],
-    ["PassTdColor", [[4, 3, 2, 1], ["bg-yellow-500", "bg-purple-500", "bg-blue-500", "bg-green-500", "bg-red-500"]]],
-    ["QbRushAttColor", [[10, 8, 6, 4], ["bg-yellow-500", "bg-purple-500", "bg-blue-500", "bg-green-500", "bg-red-500"]]],
-    ["QbRushYdColor", [[50, 40, 20, 10], ["bg-yellow-500", "bg-purple-500", "bg-blue-500", "bg-green-500", "bg-red-500"]]],
-    ["QbRushTdColor", [[2, 1], ["bg-yellow-500", "bg-purple-500", "bg-red-500"]]],
-    ["QbPtsColor", [[30, 25, 20, 15], ["bg-yellow-500", "bg-purple-500", "bg-blue-500", "bg-green-500", "bg-red-500"]]],
-    ["RushYdColor", [[100, 80, 60, 40], ["bg-yellow-500", "bg-purple-500", "bg-blue-500", "bg-green-500", "bg-red-500"]]],
-    ["RushAttColor", [[20, 15, 10, 5], ["bg-yellow-500", "bg-purple-500", "bg-blue-500", "bg-green-500", "bg-red-500"]]],
-    ["RbReceptionsColor", [[9, 6, 4, 2], ["bg-yellow-500", "bg-purple-500", "bg-blue-500", "bg-green-500", "bg-red-500"]]],
-    ["RbTargetColor", [[12, 9, 6, 3], ["bg-yellow-500", "bg-purple-500", "bg-blue-500", "bg-green-500", "bg-red-500"]]],
-    ["RecTdColor", [[2, 1], ["bg-yellow-500", "bg-purple-500", "bg-red-500"]]],
-    ["WrRecYdColor", [[100, 80, 60, 40], ["bg-yellow-500", "bg-purple-500", "bg-blue-500", "bg-green-500", "bg-red-500"]]],
-    ]);
-    
-    function findFunc(funcName, value) {
-    const [breakpoints, colors] = colorMap.get(funcName);
-    return findColor(value, breakpoints, colors);
-    }
-
-  function findColor(value, breakpoints, colors) {
-    for (let i = 0; i < breakpoints.length; i++) {
-      if (value >= breakpoints[i]) {
-        return colors[i];
-      }
-    }
-    return colors[colors.length - 1] || "";
-  }
-
-  
-
   const QBStatsTable = ({ player }) => {
     if(!player) return <p>Player info not found sad</p>
     return (
@@ -200,6 +162,7 @@ const BasicModal = ({ isOpen, setIsOpen, player }) => {
       </table>
     );
   };
+
 
   
   const renderPlayerStatsTable = (player) => {
