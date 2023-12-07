@@ -19,6 +19,7 @@ export class ColorMapper {
         RbTargetColor: [12, 9, 6, 3],
         RecTdColor: [2, 1],
         WrRecYdColor: [100, 80, 60, 40],
+        RbRecYdColor: [50, 40, 30, 20],
         SeasonRankColor:[5,20,45,70],
         SeasonAvgColor:[20,15,10,5],
         SeasonTdsColor:[8,5,3,1],

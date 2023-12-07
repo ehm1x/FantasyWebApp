@@ -20,8 +20,6 @@ function ShowRosters({ rosters }) {
 
 function Team({ team }) {
   const [showPlayers, setShowPlayers] = useState(false);
-  console.log(team);
-  console.log(team.avatar_id);
   return (
     <div
       onClick={() => setShowPlayers(!showPlayers)}
