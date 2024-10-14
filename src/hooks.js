@@ -47,7 +47,7 @@ export function useLeague(userData) {
   }, [confirmedLeague]);
 
   const fetchUserLeagues = async (userId) => {
-    const response = await fetch(`${API_BASE}/user/${userId}/leagues/nfl/2023`);
+    const response = await fetch(`${API_BASE}/user/${userId}/leagues/nfl/2024`);
     const data = await response.json();
     setLeagues(data);
 
